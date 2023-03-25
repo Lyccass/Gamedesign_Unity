@@ -19,7 +19,7 @@ public class GameManager
 
     public bool IsGameOver = false;
 
-    public float Insanity = 50f;
+    public float Insanity = 0f;
 
     public void setGameOver()
     {

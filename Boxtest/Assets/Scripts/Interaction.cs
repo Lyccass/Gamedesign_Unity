@@ -14,7 +14,7 @@ public class Interaction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Trigger active!");
+          //  Debug.Log("Trigger active!");
             triggerActive = true;
         }
     }
@@ -23,7 +23,7 @@ public class Interaction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Trigger deactive!");
+           // Debug.Log("Trigger deactive!");
             triggerActive = false;
         }
     }

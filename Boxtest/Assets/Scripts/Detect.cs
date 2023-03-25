@@ -35,7 +35,7 @@ public class Detect : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Trigger active!");
+         //   Debug.Log("Trigger active!");
             triggerActive = true;
 
             if (!PlayerMovement.hidden)

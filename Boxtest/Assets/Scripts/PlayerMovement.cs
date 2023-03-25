@@ -22,9 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if(timer >= 3)
+        if(timer >= 1)
         {
-            GameManager.Instance.addInsanity(1);
+            GameManager.Instance.addInsanity(2);
             timer = 0;
         }
 
@@ -65,7 +65,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        float speedMultiplier = (100 - GameManager.Instance.Insanity) / 100;
+        float actualSpeed;
+
+        
+        if (speedMultiplier < 0.3f)
+        {
+
+            actualSpeed = speed * 0.3f;
+        }
+        else
+        {
+            actualSpeed = speed * speedMultiplier;
+        }
+
+
+        rb.velocity = new Vector2(horizontal * actualSpeed, rb.velocity.y);
     }
 
 
