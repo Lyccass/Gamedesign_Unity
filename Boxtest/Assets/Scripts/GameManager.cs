@@ -32,9 +32,8 @@ public class GameManager
     {
 
 
-        // Remove return
-        return;
-        Debug.Log("addInsanity");
+    
+      
 
         Insanity += value;
 

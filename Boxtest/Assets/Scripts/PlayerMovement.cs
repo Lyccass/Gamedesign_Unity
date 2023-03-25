@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool isJumping = false;
     public static bool grounded = false;
     public static float groundY = 0f;
+    public static bool hidden = false;
     private float horizontal;
     private float speed = 4f;
     private float jumpingPower = 16f;
@@ -23,10 +24,20 @@ public class PlayerMovement : MonoBehaviour
 
         if(timer >= 3)
         {
-            GameManager.Instance.addInsanity(0);
+            GameManager.Instance.addInsanity(1);
             timer = 0;
         }
 
+
+        if (hidden)
+        {
+            speed = 0f;
+            return;
+        }
+        else
+        {
+            speed = 4f;
+        }
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -78,6 +89,13 @@ public class PlayerMovement : MonoBehaviour
         {
            Debug.Log("Un-Grounded");
             grounded = false;
+
+        }
+
+        if (collision.gameObject.tag.Equals("EnemySight"))
+        {
+            GameManager.Instance.setGameOver();
+
 
         }
         
