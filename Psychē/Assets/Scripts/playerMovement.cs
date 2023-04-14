@@ -81,7 +81,7 @@ public class playerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
 
-                doubleJump = !doubleJump;
+                doubleJump = false;// !doubleJump;
             }
         }
 
@@ -123,7 +123,7 @@ public class playerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-            StartCoroutine(Dash());
+           // StartCoroutine(Dash());
         }
 
        if (horizontal == 0)
@@ -171,6 +171,7 @@ public class playerMovement : MonoBehaviour
 
     private void WallSlide()
     {
+        return;
         if (IsWalled() && !IsGrounded() && horizontal != 0f)
         {
             isWallSliding = true;
@@ -184,6 +185,7 @@ public class playerMovement : MonoBehaviour
 
     private void WallJump()
     {
+        return;
         if (isWallSliding)
         {
             isWallJumping = false;
@@ -240,6 +242,7 @@ public class playerMovement : MonoBehaviour
     //Dash
     private IEnumerator Dash()
     {
+       
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
