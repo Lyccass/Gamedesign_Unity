@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -1319504060, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -1065715688, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1135265545, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 817949219, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1957681031, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -762864001, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -528766807, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -1584234198, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 2083946665, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 834158465, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -2025647683, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1948215955, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -788317410, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -2073118194, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 934004030, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -47847906, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1020075830, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 673758153, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 890449270, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 355407828, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1635588402, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1927396505, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -2103227451, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -1808855957, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1036396851, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -1805691295, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1708556287, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -91233139, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1038162724, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: -1414316548, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 364960610, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  - {fileID: 1483915996, guid: b5cfcf7452708054e80dae3348d115b2, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Tile Set_20
+  - Tile Set_21
+  - Tile Set_22
+  - Tile Set_23
+  - Tile Set_24
+  - Tile Set_25
+  - Tile Set_31
+  - Tile Set_26
+  - Tile Set_30
+  - Tile Set_27
+  - Tile Set_28
+  - Tile Set_29
+  - Tile Set_2
+  - Tile Set_3
+  - Tile Set_0
+  - Tile Set_1
+  - Tile Set_6
+  - Tile Set_7
+  - Tile Set_4
+  - Tile Set_5
+  - Tile Set_8
+  - Tile Set_9
+  - Tile Set_19
+  - Tile Set_18
+  - Tile Set_11
+  - Tile Set_10
+  - Tile Set_13
+  - Tile Set_12
+  - Tile Set_15
+  - Tile Set_14
+  - Tile Set_17
+  - Tile Set_16
+  m_RenderDataMap: {}
+  m_Tag: New Sprite Atlas
+  m_IsVariant: 0
