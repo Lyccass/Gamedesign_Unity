@@ -12,7 +12,10 @@ public class Interaction : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        // TODO: More interactable-tags (Box, key, door, etc.). Maybe store current collider2D and access it later!
+        // TODO: All of these colliders must implement a "interact" function, based on the job it should do!
+        // (For example: doors interact() opens it, changes to a specific sprite etc.)
+        if (other.CompareTag("Interactable"))
         {
           //  Debug.Log("Trigger active!");
             triggerActive = true;
@@ -21,7 +24,7 @@ public class Interaction : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Interactable"))
         {
            // Debug.Log("Trigger deactive!");
             triggerActive = false;
@@ -30,12 +33,11 @@ public class Interaction : MonoBehaviour
 
     private void Update()
     {
+
         if (triggerActive && Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Interaction");
             SomeCoolAction();
-
-
 
         }
 

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Detect script for Guards
 public class Detect : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private bool triggerActive = false;
     bool hidden = false;
 
 
@@ -18,8 +18,6 @@ public class Detect : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Trigger active!");
-            triggerActive = true;
 
             if (!PlayerController.hidden)
             {
@@ -35,8 +33,6 @@ public class Detect : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //   Debug.Log("Trigger active!");
-            triggerActive = true;
 
             if (!PlayerController.hidden)
             {
