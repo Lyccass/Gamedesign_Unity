@@ -13,8 +13,7 @@ public class Interaction : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         // TODO: More interactable-tags (Box, key, door, etc.). Maybe store current collider2D and access it later!
-        // TODO: All of these colliders must implement a "interact" function, based on the job it should do!
-        // (For example: doors interact() opens it, changes to a specific sprite etc.)
+        //  All interactables do the checking for collision and pressing a key! 
         if (other.CompareTag("Interactable"))
         {
           //  Debug.Log("Trigger active!");

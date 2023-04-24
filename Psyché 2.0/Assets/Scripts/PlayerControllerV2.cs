@@ -7,6 +7,19 @@ using UnityEngine;
 public class PlayerControllerV2 : MonoBehaviour
 {
 
+    // Der scheiß funzt doch safe nicht..
+  /*  private static PlayerControllerV2 instance;
+
+        public static PlayerControllerV2 Instance
+        {
+
+             get
+              {
+                if (instance == null) instance = new PlayerControllerV2();
+                return instance;
+             }
+         }*/
+
     private float movementInputDirection;
     private float jumpTimer;
     private float turnTimer;
@@ -18,13 +31,21 @@ public class PlayerControllerV2 : MonoBehaviour
     public bool isGrounded;
     public bool isTouchingWall;
     private bool canNormalJump;
-    private bool canWallJump;
+
     private bool IsWallSliding;
     private bool isAttemptinToJump;
     private bool checkjumpMulti;
-    private bool canMove;
-    private bool canFlip;
-   public static bool hidden;
+    //leepOverlay;
+
+    // Info
+    private bool canMove = true;
+    private bool canFlip = true;
+
+    // Dann an den stellen jeweils playercontrollerv2.hidden = true
+    private static bool hidden;
+
+    //
+    private static bool sleeping;
 
 
     private Rigidbody2D rb;
@@ -62,9 +83,9 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        amountOfJumpsLeft = amountOfJumps;
-        wallHopDirection.Normalize();
-        wallJumpDirection.Normalize();
+      //  amountOfJumpsLeft = amountOfJumps;
+      //  wallHopDirection.Normalize();
+     //   wallJumpDirection.Normalize();
     }
 
     // Update is called once per frame
@@ -74,23 +95,26 @@ public class PlayerControllerV2 : MonoBehaviour
 
         if (timer >= 1)
         {
-            GameManager.Instance.addInsanity(2);
+            // Has to be done here, because GameManager is no MonoBehaviour
+            // TODO: Maybe outsource to extra "Insanityupdater" Script or something
+
+
+            if (!sleeping)
+            {
+                GameManager.Instance.addInsanity(2);
+            }
+            else
+            {
+                GameManager.Instance.decrementInsanity(6);
+            }
+            
             timer = 0;
         }
 
+   
 
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
-
-        if (hidden)
-        {
-            movementSpeed = 0f;
-            return;
-        }
-        else
-        {
-            movementSpeed = 8f;
-        }
-
+        // Hidden bleibt aber trotzdem erhalten, um wachen-collision auszuschalten, die prüfen dann auf player.instance.hidden
 
         CheckInput();
         checkMovementDirection();
@@ -101,44 +125,24 @@ public class PlayerControllerV2 : MonoBehaviour
     private void FixedUpdate()
     {
       
-    
-
-         ApplyMovement();
+        
+        ApplyMovement();
         CheckSurrondings();
     }
 
     private void CheckSurrondings()
     {
+        // kind of replaces onCollision()
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-
         isTouchingWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, whatIsGround);
     }
 
-    private void CheckIfCanJump()
-    {
-        /*
-        if(isGrounded && rb.velocity.y <= 0.01f) 
-        {
-            amountOfJumpsLeft = amountOfJumps;
-        }
-
-
-
-      if(amountOfJumpsLeft <= 0)
-        {
-            canNormalJump = false;
-        }
-
-        else
-        {
-            canNormalJump = true;
-        }
-     */
-    }
 
     // Flip rotates the model to the other direction
     private void checkMovementDirection()
     {
+    
+
         if(isFacingRight && movementInputDirection < 0)
         {
             Flip();
@@ -157,6 +161,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             isWalking = false;
         }
+        Debug.Log(isWalking);
     }
 
     private void UpdateAnimations()
@@ -164,80 +169,72 @@ public class PlayerControllerV2 : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
-        anim.SetBool("isWall", IsWallSliding);
+       // anim.SetBool("isWall", IsWallSliding);
     }
+
+    
     private void CheckInput()
     {
-        movementInputDirection = Input.GetAxisRaw("Horizontal");
+          movementInputDirection = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            if(isGrounded || (amountOfJumpsLeft > 0 && !isTouchingWall))
+          if (Input.GetButtonDown("Jump"))
+          {
+              if(isGrounded )
+              {
+                  NormalJump();
+              }
+
+          }
+
+          //TODO: Provide rihgt button
+
+        if (Input.GetKeyDown(KeyCode.Z)){
+
+
+            if (sleeping)
             {
-                NormalJump();
-            }
+                Debug.Log("Not Sleeping!");
+                sleeping = false;
 
+            }
             else
             {
-                jumpTimer = jumpTimerSet;
-                isAttemptinToJump = true;
+                Debug.Log("Sleeping!");
+                sleeping = true;
             }
         }
-
-        if(Input.GetButtonDown("Horizontal") && isTouchingWall)
-        {
-            if(!isGrounded && movementInputDirection != facingDirection)
-            {
-                canMove = false;
-                canFlip = false;
-
-                turnTimer = turntimerSet;
-            }
-        }
-/*
-        if (!canMove)
-        {
-
-            canFlip = true;
-            canMove = true;
-
-            turnTimer = Time.deltaTime;
-
-            if(turnTimer <=0)
-            {
-                canFlip = true;
-                canMove = true;
-            }
-        }*/
+        
     }
-
-
-
+    
     private void NormalJump()
     {
+        if (sleeping)
+        {
+            return;
+        }
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             //amountOfJumpsLeft--;
-            jumpTimer = 0;
            // isAttemptinToJump = false;
            // checkjumpMulti = true;
-        
-
 
     }
     private void ApplyMovement()
     {
-  
-        if(canMove)
+            
+        if(!hidden && !sleeping)
         {
-       
+            
+
             rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
         }
     }
 
     private void Flip()
     {
-        if (!IsWallSliding  && canFlip)
+        
+        if (canFlip)
         {
+            Debug.Log("Flipped!");
             facingDirection *= -1;
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);

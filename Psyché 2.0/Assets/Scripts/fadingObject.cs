@@ -20,7 +20,7 @@ public class fadingObject : MonoBehaviour
     void Update()
     {
         float thresholdDelta = upperThreshold - lowerThreshold;
-        float lowerOverflow = insanityManager.Insanity - lowerThreshold;
+        float lowerOverflow = GameManager.Instance.Insanity - lowerThreshold;
         //If lowerThreshold is reached
         Color newColor = renderer.material.color;
 

@@ -31,13 +31,7 @@ public class GameManager
     public void addInsanity(float value)
     {
 
-
-    
-      
-
         Insanity += value;
-
-
         Debug.Log("Insanity:" + Insanity);
         if (Insanity >= 100)
         {
@@ -49,10 +43,12 @@ public class GameManager
     {
 
         this.Insanity -= value;
+
         if (Insanity < 0)
         {
             Insanity = 0;
         }
+        Debug.Log("Insanity:" + Insanity);
 
     }
 
