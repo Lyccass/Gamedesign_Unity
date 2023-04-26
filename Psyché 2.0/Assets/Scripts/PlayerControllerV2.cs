@@ -35,7 +35,10 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool IsWallSliding;
     private bool isAttemptinToJump;
     private bool checkjumpMulti;
-    //leepOverlay;
+    //sleepOverlay;
+
+  
+    public GameObject sleepScreen;
 
     // Info
     private bool canMove = true;
@@ -186,21 +189,24 @@ public class PlayerControllerV2 : MonoBehaviour
 
           }
 
-          //TODO: Provide rihgt button
+          //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z)){
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded){
 
 
             if (sleeping)
             {
+
                 Debug.Log("Not Sleeping!");
                 sleeping = false;
+                sleepScreen.SetActive(false);
 
             }
             else
             {
                 Debug.Log("Sleeping!");
                 sleeping = true;
+                sleepScreen.SetActive(true);
             }
         }
         
@@ -220,6 +226,12 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void ApplyMovement()
     {
+
+        if (sleeping)
+        {
+            // only keep falling
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
             
         if(!hidden && !sleeping)
         {
