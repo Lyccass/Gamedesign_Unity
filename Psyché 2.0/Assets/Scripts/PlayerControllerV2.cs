@@ -45,10 +45,10 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool canFlip = true;
 
     // Dann an den stellen jeweils playercontrollerv2.hidden = true
-    private static bool hidden;
+    public static bool hidden;
 
     //
-    private static bool sleeping;
+    public static bool sleeping;
 
 
     private Rigidbody2D rb;
@@ -145,6 +145,11 @@ public class PlayerControllerV2 : MonoBehaviour
     private void checkMovementDirection()
     {
     
+        if(hidden || sleeping)
+        {
+            // Dont flip ewhen sleeping/hiding
+            return;
+        }
 
         if(isFacingRight && movementInputDirection < 0)
         {
@@ -164,7 +169,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             isWalking = false;
         }
-        Debug.Log(isWalking);
+      //  Debug.Log(isWalking);
     }
 
     private void UpdateAnimations()
@@ -227,16 +232,14 @@ public class PlayerControllerV2 : MonoBehaviour
     private void ApplyMovement()
     {
 
-        if (sleeping)
+        if (sleeping || hidden)
         {
-            // only keep falling
+            // If sleeping / hiding, stop moving by setting current x-velocity to 0
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
             
         if(!hidden && !sleeping)
         {
-            
-
             rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
         }
     }

@@ -6,19 +6,30 @@ public class GuardMovement : MonoBehaviour
 {
 
     Vector3 initialPosition;
-    public float leftBorder;
-    public float rightBorder;
+
+    /// <summary>
+    /// The range the guard is allowed to walk!
+    /// </summary>
+    public float walkRange = 15;
+    
     Vector3 position;
     public float speed;
     bool moveLeft = true;
     bool moveRight = false;
-  //  public GameObject guard;
+
+    private float leftBorder;
+    private float rightBorder;
+    //  public GameObject guard;
+
 
     // Start is called before the first frame update
     void Start()
     {
         initialPosition = gameObject.transform.position;
         position = initialPosition;
+        leftBorder = initialPosition.x - walkRange;
+        rightBorder = initialPosition.x + walkRange;
+        
     }
 
     // Update is called once per frame
