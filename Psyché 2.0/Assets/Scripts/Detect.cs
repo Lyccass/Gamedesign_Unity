@@ -19,7 +19,7 @@ public class Detect : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            if (!PlayerController.hidden)
+            if (!PlayerControllerV2.hidden)
             {
                 GameManager.Instance.setGameOver();
             }
@@ -34,7 +34,7 @@ public class Detect : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
 
-            if (!PlayerController.hidden)
+            if (!PlayerControllerV2.hidden)
             {
                 GameManager.Instance.setGameOver();
             }

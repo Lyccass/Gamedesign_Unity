@@ -29,7 +29,7 @@ public class fadingObject : MonoBehaviour
             float progress = lowerOverflow / thresholdDelta;
             newColor.a = progress;
 
-            Debug.Log("Show with a:" + progress + " lowerOver" + lowerOverflow);
+        //    Debug.Log("Show with a:" + progress + " lowerOver" + lowerOverflow);
 
         }
         else
