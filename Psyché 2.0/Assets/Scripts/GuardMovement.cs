@@ -11,7 +11,9 @@ public class GuardMovement : MonoBehaviour
     /// The range the guard is allowed to walk!
     /// </summary>
     public float walkRange = 15;
-    
+    public LayerMask ground;
+    public float distanceToWall;
+
     Vector3 position;
     public float speed;
     bool moveLeft = true;
@@ -19,6 +21,10 @@ public class GuardMovement : MonoBehaviour
 
     private float leftBorder;
     private float rightBorder;
+    private bool isTouchingWall = false;
+    private Vector2 direction = Vector2.left;
+
+    private BoxCollider2D collider;
     //  public GameObject guard;
 
 
@@ -29,18 +35,39 @@ public class GuardMovement : MonoBehaviour
         position = initialPosition;
         leftBorder = initialPosition.x - walkRange;
         rightBorder = initialPosition.x + walkRange;
-        
+        collider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        checkWalls();
+
+        // Turn on touching wall
+        if (isTouchingWall)
+        {
+            Debug.Log("Guard turned at wall!");
+            moveLeft = !moveLeft;
+            moveRight = !moveRight;
+            
+            if(direction == Vector2.left)
+            {
+                direction = Vector2.right;
+            }
+            else
+            {
+                direction = Vector2.left;
+            }
+            isTouchingWall = false;
+        }
 
         if (position.x < leftBorder)
         {
 
             moveRight = true;
             moveLeft = false;
+            direction = Vector2.right;
+
         }
 
 
@@ -48,6 +75,7 @@ public class GuardMovement : MonoBehaviour
         {
             moveLeft = true;
             moveRight = false;
+            direction = Vector2.left;
         }
 
         if (moveRight)
@@ -64,4 +92,15 @@ public class GuardMovement : MonoBehaviour
 
         gameObject.transform.position = position;
     }
+
+
+    private void checkWalls()
+    {
+
+
+        isTouchingWall = Physics2D.Raycast(position, direction, distanceToWall, ground);
+
+     }
+
+
 }
