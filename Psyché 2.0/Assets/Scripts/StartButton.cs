@@ -12,6 +12,7 @@ public class StartButton : MonoBehaviour
     public void LoadScene()
     {
         PauseMenu.isPaused = true;
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneToLoad);
     }
 }

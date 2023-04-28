@@ -6,6 +6,7 @@ public class GameManager
 {
 
     private static GameManager instance;
+    public Vector2 checkpoint;
     public static GameManager Instance
     {
 
@@ -17,17 +18,35 @@ public class GameManager
 
     }
 
-    public bool IsGameOver = false;
+   public bool IsGameOver = false;
 
    
 
-    public void setGameOver()
+    public void gameOver()
     {
         IsGameOver = true;
         Debug.Log("GameOver");
+     
+        panik.Insanity = 0f;
+        Time.timeScale = 0;
+        
+
     }
 
 
+    public void restartGame()
+    {
+        IsGameOver = false;
+        // TODO: set player to current checkpoint!
+        Time.timeScale = 1;
+
+    }
+
+
+    public void setCurrentCheckpoint(Vector2 position)
+    {
+        checkpoint = position;
+    }
     public void addInsanity(float value)
     {
 
@@ -35,13 +54,13 @@ public class GameManager
     
       
 
-        panik.Insanity += 0.5f;
+        panik.Insanity += 10f;
 
 
         Debug.Log("Insanity:" + panik.Insanity);
         if (panik.Insanity >= 100)
         {
-            setGameOver();
+            gameOver();
         }
     }
 
@@ -53,6 +72,11 @@ public class GameManager
         {
             panik.Insanity = 0;
         }
+
+    }
+
+    public void pause()
+    {
 
     }
 
