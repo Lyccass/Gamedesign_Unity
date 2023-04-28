@@ -50,17 +50,23 @@ public class PlayerControllerV2 : MonoBehaviour
     private int facingDirection = 1;
 
     public float movementSpeed = 8f;
+    public float minimumSpeed =  3f;
+
     public float jumpforce = 16.0f;
+    public float minimumJumpforce = 7f;
+
+
     public float groundCheckRadius;
     public float wallCheckDistance;
-    public float wallSlideSpeed;
+   // public float wallSlideSpeed;
     public float movementForceInAir;
     public float airDragMultiplier = 0.95f;
     public float variableJumpHeightMulti = 0.5f;
-    public float wallHopForce;
-    public float wallJumpForce;
+    //public float wallHopForce;
+    //public float wallJumpForce;
     public float jumpTimerSet = 0.15f;
     public float turntimerSet = 0.1f;
+    
 
     private float timer = 0f;
 
@@ -88,7 +94,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 1)
+        if (timer >= 0.1f)
         {
             // Has to be done here, because GameManager is no MonoBehaviour
             // TODO: Maybe outsource to extra "Insanityupdater" Script or something
@@ -96,11 +102,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if (!sleeping)
             {
-                GameManager.Instance.addInsanity(2);
+                GameManager.Instance.addInsanity(0.2f);
             }
             else
             {
-                GameManager.Instance.decrementInsanity(6);
+                GameManager.Instance.decrementInsanity(0.6f);
             }
             
             timer = 0;
@@ -191,7 +197,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
           //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded){
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden){
 
 
             if (sleeping)
@@ -218,7 +224,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             return;
         }
-            rb.velocity = new Vector2(rb.velocity.x, jumpforce);
+
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 100));
+
+        if(currentJumpforce < minimumJumpforce)
+        {
+            currentJumpforce = minimumJumpforce;
+        }
+            rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
             //amountOfJumpsLeft--;
            // isAttemptinToJump = false;
            // checkjumpMulti = true;
@@ -235,7 +248,15 @@ public class PlayerControllerV2 : MonoBehaviour
             
         if(!hidden && !sleeping)
         {
-            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+
+            float currentSpeed = movementSpeed * (1-(GameManager.Instance.Insanity / 100));
+
+            if(currentSpeed< minimumSpeed)
+            {
+                currentSpeed = minimumSpeed;
+            }
+
+            rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
         }
     }
 

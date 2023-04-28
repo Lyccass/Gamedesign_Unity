@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public KeyCode interactKey = KeyCode.E; // the key code for interaction
+    public KeyCode interactKey = KeyCode.F; // the key code for interaction
     public int keyID; // a unique ID for each key
     private bool canInteract = false;
 

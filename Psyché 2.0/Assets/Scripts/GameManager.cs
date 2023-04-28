@@ -29,6 +29,7 @@ public class GameManager
         Debug.Log("GameOver");
         Time.timeScale = 0;
         
+        
 
     }
 

@@ -10,7 +10,7 @@ public class Lock : MonoBehaviour
 
     private void Update()
     {
-        if (canInteract && Input.GetKeyDown(KeyCode.E))
+        if (canInteract && Input.GetKeyDown(KeyCode.F))
         {
             // check if the player has all three keys
             if (Inventory.instance.HasKey(1) && Inventory.instance.HasKey(2) && Inventory.instance.HasKey(3))
