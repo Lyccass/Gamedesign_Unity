@@ -18,6 +18,7 @@ public class GameManager
 
     }
 
+    public float Insanity = 0f;
    public bool IsGameOver = false;
 
    
@@ -26,8 +27,6 @@ public class GameManager
     {
         IsGameOver = true;
         Debug.Log("GameOver");
-     
-        panik.Insanity = 0f;
         Time.timeScale = 0;
         
 
@@ -65,7 +64,7 @@ public class GameManager
         this.Insanity -= value;
         if (Insanity < 0)
         {
-            panik.Insanity = 0;
+            Insanity = 0;
         }
         Debug.Log("Insanity:" + Insanity);
 

@@ -21,7 +21,7 @@ public class Detect : MonoBehaviour
 
             if (!PlayerControllerV2.hidden)
             {
-                GameManager.Instance.setGameOver();
+                GameManager.Instance.gameOver();
             }
 
 
@@ -36,7 +36,7 @@ public class Detect : MonoBehaviour
 
             if (!PlayerControllerV2.hidden)
             {
-                GameManager.Instance.setGameOver();
+                GameManager.Instance.gameOver();
             }
 
 

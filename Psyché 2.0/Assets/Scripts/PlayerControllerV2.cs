@@ -21,20 +21,12 @@ public class PlayerControllerV2 : MonoBehaviour
          }*/
 
     private float movementInputDirection;
-    private float jumpTimer;
-    private float turnTimer;
-
-    private int amountOfJumpsLeft;
     private bool isFacingRight = true;
 
     private bool isWalking;
     public bool isGrounded;
     public bool isTouchingWall;
-    private bool canNormalJump;
 
-    private bool IsWallSliding;
-    private bool isAttemptinToJump;
-    private bool checkjumpMulti;
     //sleepOverlay;
 
   
@@ -121,6 +113,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
         CheckInput();
         checkMovementDirection();
+        //Debug.Log(" walking: " + isWalking);
         UpdateAnimations();
         //CheckIfCanJump();
     }
@@ -177,6 +170,7 @@ public class PlayerControllerV2 : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
+   
        // anim.SetBool("isWall", IsWallSliding);
     }
 
@@ -185,6 +179,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
           movementInputDirection = Input.GetAxisRaw("Horizontal");
 
+//        Debug.Log(isGrounded);
           if (Input.GetButtonDown("Jump"))
           {
               if(isGrounded )
