@@ -51,14 +51,9 @@ public class GameManager
     {
 
 
-    
-      
-
-        panik.Insanity += 10f;
-
-
-        Debug.Log("Insanity:" + panik.Insanity);
-        if (panik.Insanity >= 100)
+        Insanity += value;
+        Debug.Log("Insanity:" + Insanity);
+        if (Insanity >= 100)
         {
             gameOver();
         }
@@ -67,11 +62,12 @@ public class GameManager
     public void decrementInsanity(float value)
     {
 
-        panik.Insanity -= value;
-        if (panik.Insanity < 0)
+        this.Insanity -= value;
+        if (Insanity < 0)
         {
             panik.Insanity = 0;
         }
+        Debug.Log("Insanity:" + Insanity);
 
     }
 
