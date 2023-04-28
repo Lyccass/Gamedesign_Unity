@@ -7,7 +7,7 @@ public class panik : MonoBehaviour
 
 
     public SpriteRenderer spriteRenderer;
-    static public float Insanity = 0f;
+    public float Insanity = 0f;
 
 
 
@@ -23,7 +23,7 @@ public class panik : MonoBehaviour
 
     {
 
-
+        Insanity = GameManager.Instance.Insanity;
 
         ChangeSprite();
     }
