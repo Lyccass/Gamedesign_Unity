@@ -42,6 +42,7 @@ public class PlayerControllerV2 : MonoBehaviour
     //
     public static bool sleeping;
 
+    private bool ducking = false;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -79,11 +80,14 @@ public class PlayerControllerV2 : MonoBehaviour
     public Transform wallCheck;
     public LayerMask whatIsGround;
 
+    public BoxCollider2D collider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<BoxCollider2D>();
       //  amountOfJumpsLeft = amountOfJumps;
       //  wallHopDirection.Normalize();
      //   wallJumpDirection.Normalize();
@@ -111,7 +115,6 @@ public class PlayerControllerV2 : MonoBehaviour
             
             timer = 0;
         }
-
    
 
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
@@ -215,9 +218,36 @@ public class PlayerControllerV2 : MonoBehaviour
                 sleepScreen.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            duck();
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            unduck();
+        }
         
     }
     
+
+    private void duck()
+    {
+        // TODO: use animation to transit to ducking sprite
+
+        // half height
+        collider.size *= new Vector2(1f, 0.5f);
+        // half speed
+        movementSpeed *= 0.5f;
+    }
+
+    private void unduck()
+    {
+        // double height
+        collider.size *= new Vector2(1f,2f);
+        movementSpeed *= 2f;
+
+    }
     private void NormalJump()
     {
         if (sleeping)
