@@ -30,7 +30,7 @@ public class panik : MonoBehaviour
 
     void ChangeSprite()
     {
-        transform.localScale = new Vector3(26f + (Insanity / 10), 1f + (Insanity / 10), 1f + (Insanity / 10));
+        transform.localScale = new Vector3(26f + (Insanity / 25), 1f + (Insanity / 25), 1f + (Insanity / 25));
     }
 }
 
