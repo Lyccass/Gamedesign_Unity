@@ -50,23 +50,17 @@ public class PlayerControllerV2 : MonoBehaviour
     private int facingDirection = 1;
 
     public float movementSpeed = 8f;
-    public float minimumSpeed =  3f;
-
     public float jumpforce = 16.0f;
-    public float minimumJumpforce = 7f;
-
-
     public float groundCheckRadius;
     public float wallCheckDistance;
-   // public float wallSlideSpeed;
+    public float wallSlideSpeed;
     public float movementForceInAir;
     public float airDragMultiplier = 0.95f;
     public float variableJumpHeightMulti = 0.5f;
-    //public float wallHopForce;
-    //public float wallJumpForce;
+    public float wallHopForce;
+    public float wallJumpForce;
     public float jumpTimerSet = 0.15f;
     public float turntimerSet = 0.1f;
-    
 
     private float timer = 0f;
 
@@ -84,6 +78,8 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        GameManager.Instance.checkpoint = gameObject.transform.position;
       //  amountOfJumpsLeft = amountOfJumps;
       //  wallHopDirection.Normalize();
      //   wallJumpDirection.Normalize();
@@ -94,7 +90,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 0.1f)
+        if (timer >= 1)
         {
             // Has to be done here, because GameManager is no MonoBehaviour
             // TODO: Maybe outsource to extra "Insanityupdater" Script or something
@@ -102,11 +98,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if (!sleeping)
             {
-                GameManager.Instance.addInsanity(0.2f);
+                GameManager.Instance.addInsanity(2);
             }
             else
             {
-                GameManager.Instance.decrementInsanity(0.6f);
+                GameManager.Instance.decrementInsanity(6);
             }
             
             timer = 0;
@@ -122,6 +118,13 @@ public class PlayerControllerV2 : MonoBehaviour
         //Debug.Log(" walking: " + isWalking);
         UpdateAnimations();
         //CheckIfCanJump();
+
+
+        if (GameManager.Instance.restart)
+        {
+            setBackToCheckPoint();
+            GameManager.Instance.restart = false;
+        }
     }
 
     private void FixedUpdate()
@@ -185,7 +188,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
           movementInputDirection = Input.GetAxisRaw("Horizontal");
 
-//        Debug.Log(isGrounded);
+       // Debug.Log(isGrounded);
           if (Input.GetButtonDown("Jump"))
           {
               if(isGrounded )
@@ -197,7 +200,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
           //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden){
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded){
 
 
             if (sleeping)
@@ -224,14 +227,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             return;
         }
-
-        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 100));
-
-        if(currentJumpforce < minimumJumpforce)
-        {
-            currentJumpforce = minimumJumpforce;
-        }
-            rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce);
             //amountOfJumpsLeft--;
            // isAttemptinToJump = false;
            // checkjumpMulti = true;
@@ -248,15 +244,7 @@ public class PlayerControllerV2 : MonoBehaviour
             
         if(!hidden && !sleeping)
         {
-
-            float currentSpeed = movementSpeed * (1-(GameManager.Instance.Insanity / 100));
-
-            if(currentSpeed< minimumSpeed)
-            {
-                currentSpeed = minimumSpeed;
-            }
-
-            rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
+            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
         }
     }
 
@@ -272,6 +260,15 @@ public class PlayerControllerV2 : MonoBehaviour
         }
         
     }
+
+
+    private void setBackToCheckPoint()
+    {
+        gameObject.transform.position = GameManager.Instance.checkpoint;
+
+
+    }
+
 
     private void OnDrawGizmos()
     {

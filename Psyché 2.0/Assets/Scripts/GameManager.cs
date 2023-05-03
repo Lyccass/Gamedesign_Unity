@@ -7,6 +7,7 @@ public class GameManager
 
     private static GameManager instance;
     public Vector2 checkpoint;
+    public bool restart = false;
     public static GameManager Instance
     {
 
@@ -28,8 +29,9 @@ public class GameManager
         IsGameOver = true;
         Debug.Log("GameOver");
         Time.timeScale = 0;
-        
-        
+        restartGame();         ///// BITTE WIEDER LÖSCHEN, SONST INSTANT RESTART
+
+
 
     }
 
@@ -37,16 +39,13 @@ public class GameManager
     public void restartGame()
     {
         IsGameOver = false;
-        // TODO: set player to current checkpoint!
         Time.timeScale = 1;
+        Insanity = 0f;
+        restart = true;
+
 
     }
 
-
-    public void setCurrentCheckpoint(Vector2 position)
-    {
-        checkpoint = position;
-    }
     public void addInsanity(float value)
     {
 
