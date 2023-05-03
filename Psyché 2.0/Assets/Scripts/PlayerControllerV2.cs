@@ -51,10 +51,10 @@ public class PlayerControllerV2 : MonoBehaviour
     private int facingDirection = 1;
 
     public float movementSpeed = 8f;
-    public float minimumSpeed =  3f;
+    public float minimumSpeed =  4f;
 
     public float jumpforce = 16.0f;
-    public float minimumJumpforce = 7f;
+    public float minimumJumpforce = 10f;
 
 
     public float groundCheckRadius;
@@ -255,7 +255,7 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
 
-        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 100));
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 200));
 
         if(currentJumpforce < minimumJumpforce)
         {
@@ -279,7 +279,7 @@ public class PlayerControllerV2 : MonoBehaviour
         if(!hidden && !sleeping)
         {
 
-            float currentSpeed = movementSpeed * (1-(GameManager.Instance.Insanity / 100));
+            float currentSpeed = movementSpeed * (1-(GameManager.Instance.Insanity / 200));
 
             if(currentSpeed< minimumSpeed)
             {
