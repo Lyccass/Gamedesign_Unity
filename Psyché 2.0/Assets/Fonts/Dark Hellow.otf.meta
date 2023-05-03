@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 9f237ae7e1aa7524eb9b4a7b75854f2a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Dark Hellow
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 79eef8cc6562f934fbcf41bb84affec3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
