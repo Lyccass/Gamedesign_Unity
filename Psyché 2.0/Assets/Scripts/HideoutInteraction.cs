@@ -6,6 +6,8 @@ public class HideoutInteraction : MonoBehaviour
 {
 
     bool triggerActive = false;
+
+    public GameObject sprite;
     // Start is called before the first frame update
     void Start()
     {

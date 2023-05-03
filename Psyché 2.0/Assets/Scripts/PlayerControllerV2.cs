@@ -115,8 +115,20 @@ public class PlayerControllerV2 : MonoBehaviour
             
             timer = 0;
         }
-   
 
+        if (hidden)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Hidden";
+            isWalking = false;
+       
+        }
+        else
+        {
+
+            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+            isWalking = true;
+
+        }
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
         // Hidden bleibt aber trotzdem erhalten, um wachen-collision auszuschalten, die prüfen dann auf player.instance.hidden
 
@@ -125,6 +137,12 @@ public class PlayerControllerV2 : MonoBehaviour
         //Debug.Log(" walking: " + isWalking);
         UpdateAnimations();
         //CheckIfCanJump();
+        if (GameManager.Instance.restart)
+        {
+            setBackToCheckpoint();
+            GameManager.Instance.restart = false;
+        }
+
     }
 
     private void FixedUpdate()
@@ -186,6 +204,11 @@ public class PlayerControllerV2 : MonoBehaviour
     
     private void CheckInput()
     {
+        if (GameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
           movementInputDirection = Input.GetAxisRaw("Horizontal");
 
 //        Debug.Log(isGrounded);
@@ -230,6 +253,11 @@ public class PlayerControllerV2 : MonoBehaviour
         
     }
     
+
+    private void hide()
+    {
+
+    }
 
     private void duck()
     {
@@ -301,6 +329,13 @@ public class PlayerControllerV2 : MonoBehaviour
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
         
+    }
+
+
+    // 
+    private void setBackToCheckpoint()
+    {
+        gameObject.transform.position = GameManager.Instance.checkpoint;
     }
 
     private void OnDrawGizmos()

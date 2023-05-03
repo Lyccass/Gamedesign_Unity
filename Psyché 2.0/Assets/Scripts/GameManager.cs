@@ -29,7 +29,7 @@ public class GameManager
         IsGameOver = true;
         Debug.Log("GameOver");
         Time.timeScale = 0;
-        restartGame();         ///// BITTE WIEDER LÖSCHEN, SONST INSTANT RESTART
+       // restartGame();         ///// BITTE WIEDER LÖSCHEN, SONST INSTANT RESTART
 
 
 
