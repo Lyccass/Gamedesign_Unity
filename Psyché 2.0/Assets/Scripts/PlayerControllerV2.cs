@@ -42,6 +42,7 @@ public class PlayerControllerV2 : MonoBehaviour
     //
     public static bool sleeping;
 
+    private bool ducking = false;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -50,17 +51,23 @@ public class PlayerControllerV2 : MonoBehaviour
     private int facingDirection = 1;
 
     public float movementSpeed = 8f;
+    public float minimumSpeed =  3f;
+
     public float jumpforce = 16.0f;
+    public float minimumJumpforce = 7f;
+
+
     public float groundCheckRadius;
     public float wallCheckDistance;
-    public float wallSlideSpeed;
+   // public float wallSlideSpeed;
     public float movementForceInAir;
     public float airDragMultiplier = 0.95f;
     public float variableJumpHeightMulti = 0.5f;
-    public float wallHopForce;
-    public float wallJumpForce;
+    //public float wallHopForce;
+    //public float wallJumpForce;
     public float jumpTimerSet = 0.15f;
     public float turntimerSet = 0.1f;
+    
 
     private float timer = 0f;
 
@@ -73,13 +80,14 @@ public class PlayerControllerV2 : MonoBehaviour
     public Transform wallCheck;
     public LayerMask whatIsGround;
 
+    public BoxCollider2D collider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
-        GameManager.Instance.checkpoint = gameObject.transform.position;
+        collider = GetComponent<BoxCollider2D>();
       //  amountOfJumpsLeft = amountOfJumps;
       //  wallHopDirection.Normalize();
      //   wallJumpDirection.Normalize();
@@ -90,7 +98,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 1)
+        if (timer >= 0.1f)
         {
             // Has to be done here, because GameManager is no MonoBehaviour
             // TODO: Maybe outsource to extra "Insanityupdater" Script or something
@@ -98,16 +106,15 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if (!sleeping)
             {
-                GameManager.Instance.addInsanity(2);
+                GameManager.Instance.addInsanity(0.2f);
             }
             else
             {
-                GameManager.Instance.decrementInsanity(6);
+                GameManager.Instance.decrementInsanity(0.6f);
             }
             
             timer = 0;
         }
-
    
 
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
@@ -118,13 +125,6 @@ public class PlayerControllerV2 : MonoBehaviour
         //Debug.Log(" walking: " + isWalking);
         UpdateAnimations();
         //CheckIfCanJump();
-
-
-        if (GameManager.Instance.restart)
-        {
-            setBackToCheckPoint();
-            GameManager.Instance.restart = false;
-        }
     }
 
     private void FixedUpdate()
@@ -188,7 +188,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
           movementInputDirection = Input.GetAxisRaw("Horizontal");
 
-       // Debug.Log(isGrounded);
+//        Debug.Log(isGrounded);
           if (Input.GetButtonDown("Jump"))
           {
               if(isGrounded )
@@ -200,7 +200,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
           //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded){
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden){
 
 
             if (sleeping)
@@ -218,16 +218,50 @@ public class PlayerControllerV2 : MonoBehaviour
                 sleepScreen.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            duck();
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            unduck();
+        }
         
     }
     
+
+    private void duck()
+    {
+        // TODO: use animation to transit to ducking sprite
+
+        // half height
+        collider.size *= new Vector2(1f, 0.5f);
+        // half speed
+        movementSpeed *= 0.5f;
+    }
+
+    private void unduck()
+    {
+        // double height
+        collider.size *= new Vector2(1f,2f);
+        movementSpeed *= 2f;
+
+    }
     private void NormalJump()
     {
         if (sleeping)
         {
             return;
         }
-            rb.velocity = new Vector2(rb.velocity.x, jumpforce);
+
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 100));
+
+        if(currentJumpforce < minimumJumpforce)
+        {
+            currentJumpforce = minimumJumpforce;
+        }
+            rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
             //amountOfJumpsLeft--;
            // isAttemptinToJump = false;
            // checkjumpMulti = true;
@@ -244,7 +278,15 @@ public class PlayerControllerV2 : MonoBehaviour
             
         if(!hidden && !sleeping)
         {
-            rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+
+            float currentSpeed = movementSpeed * (1-(GameManager.Instance.Insanity / 100));
+
+            if(currentSpeed< minimumSpeed)
+            {
+                currentSpeed = minimumSpeed;
+            }
+
+            rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
         }
     }
 
@@ -260,15 +302,6 @@ public class PlayerControllerV2 : MonoBehaviour
         }
         
     }
-
-
-    private void setBackToCheckPoint()
-    {
-        gameObject.transform.position = GameManager.Instance.checkpoint;
-
-
-    }
-
 
     private void OnDrawGizmos()
     {
