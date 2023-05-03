@@ -108,19 +108,103 @@ TextureImporter:
       name: walk_cycle_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 7680
-        height: 4320
+        x: 39
+        y: 506
+        width: 1464
+        height: 3178
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1616, y: 507, z: 4472, w: 611}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: c5caa15124f2e9b46adec9110d55bd12
       internalID: 1711986208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_cycle_1
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 504
+        width: 1597
+        height: 3210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22eb00600cd814c4683e886966e3d4fd
+      internalID: -1980082110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_cycle_2
+      rect:
+        serializedVersion: 2
+        x: 3482
+        y: 516
+        width: 1050
+        height: 3277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37f92fcd712fe2d49b492950bdc54733
+      internalID: -618747650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_cycle_3
+      rect:
+        serializedVersion: 2
+        x: 4723
+        y: 504
+        width: 1084
+        height: 3319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb5573e26008b574bba47e2fcd5f917c
+      internalID: -750864678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walk_cycle_4
+      rect:
+        serializedVersion: 2
+        x: 5908
+        y: 489
+        width: 1680
+        height: 3177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1813acc8b77cb3459d93bb51587cc0e
+      internalID: -1730194141
       vertices: []
       indices: 
       edges: []
@@ -137,6 +221,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       walk_cycle_0: 1711986208
+      walk_cycle_1: -1980082110
+      walk_cycle_2: -618747650
+      walk_cycle_3: -750864678
+      walk_cycle_4: -1730194141
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
