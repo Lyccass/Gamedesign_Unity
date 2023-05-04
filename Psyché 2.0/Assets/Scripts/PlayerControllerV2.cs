@@ -42,6 +42,7 @@ public class PlayerControllerV2 : MonoBehaviour
     //
     public static bool sleeping;
 
+    private bool ducking = false;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -79,11 +80,14 @@ public class PlayerControllerV2 : MonoBehaviour
     public Transform wallCheck;
     public LayerMask whatIsGround;
 
+    public BoxCollider2D collider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<BoxCollider2D>();
       //  amountOfJumpsLeft = amountOfJumps;
       //  wallHopDirection.Normalize();
      //   wallJumpDirection.Normalize();
@@ -112,8 +116,19 @@ public class PlayerControllerV2 : MonoBehaviour
             timer = 0;
         }
 
-   
+        if (hidden)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Hidden";
+            isWalking = false;
+       
+        }
+        else
+        {
 
+            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+            isWalking = true;
+
+        }
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
         // Hidden bleibt aber trotzdem erhalten, um wachen-collision auszuschalten, die prüfen dann auf player.instance.hidden
 
@@ -122,6 +137,12 @@ public class PlayerControllerV2 : MonoBehaviour
         //Debug.Log(" walking: " + isWalking);
         UpdateAnimations();
         //CheckIfCanJump();
+        if (GameManager.Instance.restart)
+        {
+            setBackToCheckpoint();
+            GameManager.Instance.restart = false;
+        }
+
     }
 
     private void FixedUpdate()
@@ -183,6 +204,11 @@ public class PlayerControllerV2 : MonoBehaviour
     
     private void CheckInput()
     {
+        if (GameManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
           movementInputDirection = Input.GetAxisRaw("Horizontal");
 
 //        Debug.Log(isGrounded);
@@ -215,9 +241,41 @@ public class PlayerControllerV2 : MonoBehaviour
                 sleepScreen.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            duck();
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            unduck();
+        }
         
     }
     
+
+    private void hide()
+    {
+
+    }
+
+    private void duck()
+    {
+        // TODO: use animation to transit to ducking sprite
+
+        // half height
+        collider.size *= new Vector2(1f, 0.5f);
+        // half speed
+        movementSpeed *= 0.5f;
+    }
+
+    private void unduck()
+    {
+        // double height
+        collider.size *= new Vector2(1f,2f);
+        movementSpeed *= 2f;
+
+    }
     private void NormalJump()
     {
         if (sleeping)
@@ -271,6 +329,13 @@ public class PlayerControllerV2 : MonoBehaviour
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
         
+    }
+
+
+    // 
+    private void setBackToCheckpoint()
+    {
+        gameObject.transform.position = GameManager.Instance.checkpoint;
     }
 
     private void OnDrawGizmos()

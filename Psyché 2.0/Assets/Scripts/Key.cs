@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public KeyCode interactKey = KeyCode.F; // the key code for interaction
     public int keyID; // a unique ID for each key
     private bool canInteract = false;
 
     private void Update()
     {
-        if ( canInteract && Input.GetKeyDown(interactKey))
+        if ( canInteract && Input.GetKeyDown(KeyCode.F))
         {
             // add the key to the player's inventory
             Inventory.instance.AddKey(keyID);
