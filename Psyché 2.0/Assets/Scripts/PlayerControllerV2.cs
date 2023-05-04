@@ -31,6 +31,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
   
     public GameObject sleepScreen;
+    public GameObject sign;
 
     // Info
     private bool canMove = true;
@@ -120,13 +121,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Hidden";
             isWalking = false;
-       
+            sign.SetActive(false);
+
         }
         else
         {
 
             gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-            isWalking = true;
+            //isWalking = true;
 
         }
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
@@ -135,7 +137,7 @@ public class PlayerControllerV2 : MonoBehaviour
         CheckInput();
         checkMovementDirection();
         //Debug.Log(" walking: " + isWalking);
-        UpdateAnimations();
+        //UpdateAnimations();
         //CheckIfCanJump();
         if (GameManager.Instance.restart)
         {
@@ -143,14 +145,22 @@ public class PlayerControllerV2 : MonoBehaviour
             GameManager.Instance.restart = false;
         }
 
+
+        if ( GameManager.Instance.IsGameOver)
+        {
+            sleeping = false;
+            sleepScreen.SetActive(false);
+        }
+
+
     }
 
     private void FixedUpdate()
     {
-      
-        
+        UpdateAnimations();
         ApplyMovement();
         CheckSurrondings();
+
     }
 
     private void CheckSurrondings()
@@ -194,6 +204,12 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private void UpdateAnimations()
     {
+
+        if (!(rb.velocity.x  > minimumSpeed || rb.velocity.x < -minimumSpeed))
+        {
+            isWalking = false;
+        }
+
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
@@ -223,7 +239,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
           //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden){
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden ){
 
 
             if (sleeping)
@@ -287,7 +303,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
         if(currentJumpforce < minimumJumpforce)
         {
-            currentJumpforce = minimumJumpforce;
+            currentJumpforce = 0;
         }
             rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
             //amountOfJumpsLeft--;
@@ -302,6 +318,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
             rb.velocity = new Vector2(0, rb.velocity.y);
+            isWalking = false;
         }
             
         if(!hidden && !sleeping)
@@ -311,7 +328,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if(currentSpeed< minimumSpeed)
             {
-                currentSpeed = minimumSpeed;
+                currentSpeed = 0;
             }
 
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
@@ -343,5 +360,39 @@ public class PlayerControllerV2 : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
 
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
+    }
+
+    private void OnTriggerExit2D(Collider2D collision )
+    {
+        if (collision.gameObject.CompareTag("triggerSign") && !hidden)
+        {
+            sign.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("triggerSign") && !hidden)
+        {
+            sign.SetActive(true);
+        } 
+        else
+        {
+            sign.SetActive(false);
+        }
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("triggerSign") && !hidden)
+        {
+            sign.SetActive(true);
+        }
+        if (collision.gameObject.CompareTag("triggerSign") && hidden)
+        {
+            sign.SetActive(false);
+        }
+
     }
 }
