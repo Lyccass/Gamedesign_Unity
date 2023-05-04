@@ -46,6 +46,7 @@ public class ladder : MonoBehaviour
                 //Player.transform.position = bottom.position;
                 Player.transform.position += new Vector3(0, -down, 0);
                 Debug.Log("ladder down");
+                Time.timeScale = 0.001f;
 
             }
             else // player is at the bottom of the ladder
@@ -53,6 +54,7 @@ public class ladder : MonoBehaviour
                 //Player.transform.position = top.position;
                 Player.transform.position += new Vector3(0, up, 0);
                 Debug.Log("ladder up");
+                Time.timeScale = 0.001f;
             }
         }
     }

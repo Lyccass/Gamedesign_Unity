@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3259113267459055474}
   m_Layer: 0
   m_Name: Lock2
-  m_TagString: Lock
+  m_TagString: triggerSign
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1296102461
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.9129917, b: 0.35444742, a: 1}

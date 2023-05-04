@@ -26,8 +26,8 @@ public class Key : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        { 
-        canInteract = true;
+        {
+            canInteract = true;
         Debug.Log("Maybe Key");
         }
        
