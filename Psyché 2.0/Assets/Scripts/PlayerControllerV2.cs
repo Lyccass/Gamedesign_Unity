@@ -225,6 +225,11 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
 
+	if(Input.GetKeyDown(KeyCode.L)){
+		GameManager.Instance.cheats = !GameManager.Instance.cheats;
+
+	}
+
           movementInputDirection = Input.GetAxisRaw("Horizontal");
 
 //        Debug.Log(isGrounded);

@@ -8,6 +8,7 @@ public class GameManager
     private static GameManager instance;
     public Vector2 checkpoint;
     public bool restart = false;
+    public bool cheats = false;
     public static GameManager Instance
     {
 
@@ -26,6 +27,10 @@ public class GameManager
 
     public void gameOver()
     {
+	if(cheats){
+	return;
+	}
+
         IsGameOver = true;
         Debug.Log("GameOver");
         Time.timeScale = 0;
@@ -48,7 +53,8 @@ public class GameManager
 
     public void addInsanity(float value)
     {
-
+		if(cheats){
+		return;}
 
         Insanity += value;
         Debug.Log("Insanity:" + Insanity);

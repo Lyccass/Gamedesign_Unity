@@ -50,6 +50,7 @@ public class GuardMovement : MonoBehaviour
             moveLeft = !moveLeft;
             moveRight = !moveRight;
             
+            // Switch direction at wall
             if(direction == Vector2.left)
             {
                 direction = Vector2.right;
@@ -67,7 +68,7 @@ public class GuardMovement : MonoBehaviour
             moveRight = true;
             moveLeft = false;
             direction = Vector2.right;
-            transform.Rotate(0.0f, 180.0f, 0.0f);
+           // transform.Rotate(0.0f, 180.0f, 0.0f);
 
         }
 
@@ -77,12 +78,13 @@ public class GuardMovement : MonoBehaviour
             moveLeft = true;
             moveRight = false;
             direction = Vector2.left;
-            transform.Rotate(0.0f, 180.0f, 0.0f);
+           
         }
 
         if (moveRight)
         {
             position.x += speed * Time.deltaTime;
+            transform.eulerAngles = new Vector3(0,180f,0);
         }
 
 
@@ -90,6 +92,7 @@ public class GuardMovement : MonoBehaviour
         if (moveLeft)
         {
             position.x -= speed * Time.deltaTime;
+            transform.eulerAngles = new Vector3(0, 0f, 0);
         }
 
         gameObject.transform.position = position;
