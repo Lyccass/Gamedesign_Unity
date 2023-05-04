@@ -67,6 +67,7 @@ public class GuardMovement : MonoBehaviour
             moveRight = true;
             moveLeft = false;
             direction = Vector2.right;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
 
         }
 
@@ -76,6 +77,7 @@ public class GuardMovement : MonoBehaviour
             moveLeft = true;
             moveRight = false;
             direction = Vector2.left;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
         }
 
         if (moveRight)
