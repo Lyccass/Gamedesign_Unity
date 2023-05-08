@@ -92,6 +92,8 @@ public class GuardMovement : MonoBehaviour
         if (moveLeft)
         {
             position.x -= speed * Time.deltaTime;
+            
+            
             transform.eulerAngles = new Vector3(0, 0f, 0);
         }
 
