@@ -9,6 +9,7 @@ public class GameManager
     public Vector2 checkpoint;
     public bool restart = false;
     public bool cheats = false;
+    public bool isFading = false;
     public static GameManager Instance
     {
 
@@ -57,7 +58,7 @@ public class GameManager
 		return;}
 
         Insanity += value;
-        Debug.Log("Insanity:" + Insanity);
+       // Debug.Log("Insanity:" + Insanity);
         if (Insanity >= 100)
         {
             gameOver();

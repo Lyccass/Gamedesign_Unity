@@ -38,24 +38,38 @@ public class ladder : MonoBehaviour
     {
         if (canTeleport && Input.GetKeyDown(KeyCode.F))  //&& PlayerControllerV2.isGrounded
         {
-            Debug.Log("3333 ladder maybe");
-            // teleport the player to the opposite end of the ladder
-            Vector3 playerPos = Player.transform.position;
-            if (playerPos.y > transform.position.y) // player is at the top of the ladder
-            {
-                //Player.transform.position = bottom.position;
-                Player.transform.position += new Vector3(0, -down, 0);
-                Debug.Log("ladder down");
-                Time.timeScale = 0.001f;
+            GameManager.Instance.isFading = true;
 
-            }
-            else // player is at the bottom of the ladder
-            {
-                //Player.transform.position = top.position;
-                Player.transform.position += new Vector3(0, up, 0);
-                Debug.Log("ladder up");
-                Time.timeScale = 0.001f;
-            }
+        }
+
+        if (canTeleport && fadeCanvas.alpha >= 1)  //&& PlayerControllerV2.isGrounded
+        {
+            ladderMove();
+
+
+        }
+
+
+    }
+
+    private void ladderMove()
+    {
+        // teleport the player to the opposite end of the ladder
+        Vector3 playerPos = Player.transform.position;
+        if (playerPos.y > transform.position.y) // player is at the top of the ladder
+        {
+            //Player.transform.position = bottom.position;
+            Player.transform.position += new Vector3(0, -down, 0);
+            Debug.Log("ladder down");
+            Time.timeScale = 0.001f;
+
+        }
+        else // player is at the bottom of the ladder
+        {
+            //Player.transform.position = top.position;
+            Player.transform.position += new Vector3(0, up, 0);
+            Debug.Log("ladder up");
+            Time.timeScale = 0.001f;
         }
     }
 }
