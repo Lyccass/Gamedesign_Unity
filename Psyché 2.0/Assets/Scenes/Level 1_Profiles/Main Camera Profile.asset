@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
   m_Name: Grain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -21,62 +21,13 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.217
+    value: 0
   size:
     overrideState: 1
-    value: 3
+    value: 2.68
   lumContrib:
     overrideState: 0
-    value: 0.8
---- !u!114 &-3033687336831657419
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1cb7e9e120078f43bce4f0b1be547a7, type: 3}
-  m_Name: AmbientOcclusion
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
     value: 0
-  mode:
-    overrideState: 1
-    value: 0
-  intensity:
-    overrideState: 1
-    value: 0
-  color:
-    overrideState: 1
-    value: {r: 0, g: 0.2755734, b: 0.6132076, a: 1}
-  ambientOnly:
-    overrideState: 1
-    value: 0
-  noiseFilterTolerance:
-    overrideState: 1
-    value: 0
-  blurTolerance:
-    overrideState: 1
-    value: -4.6
-  upsampleTolerance:
-    overrideState: 1
-    value: -12
-  thicknessModifier:
-    overrideState: 1
-    value: 7.2
-  directLightingStrength:
-    overrideState: 1
-    value: 0
-  radius:
-    overrideState: 1
-    value: 0.25
-  quality:
-    overrideState: 1
-    value: 2
 --- !u!114 &-2751336878665175455
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -137,7 +88,6 @@ MonoBehaviour:
   - {fileID: 3439751181434026733}
   - {fileID: -6701447333041775272}
   - {fileID: 2163647290062049455}
-  - {fileID: -3033687336831657419}
   - {fileID: -2751336878665175455}
 --- !u!114 &2163647290062049455
 MonoBehaviour:
@@ -151,28 +101,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b77c5407dc277943b591ade9e6b18c5, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   intensity:
     overrideState: 1
-    value: 51
+    value: 0
   intensityX:
     overrideState: 1
-    value: 0.677
+    value: 1
   intensityY:
     overrideState: 1
     value: 1
   centerX:
     overrideState: 1
-    value: 0.02
+    value: 0
   centerY:
     overrideState: 1
-    value: -0.01
+    value: 0
   scale:
     overrideState: 0
-    value: 1.63
+    value: 1.25
 --- !u!114 &3439751181434026733
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -185,17 +135,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   spectralLut:
     overrideState: 0
-    value: {fileID: 0}
+    value: {fileID: 2800000, guid: fd12dbe3b63ae464f824b4a74c0e1766, type: 3}
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 1
+    value: 0
   fastMode:
     overrideState: 1
     value: 0
