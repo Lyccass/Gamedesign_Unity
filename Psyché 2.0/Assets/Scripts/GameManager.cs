@@ -59,10 +59,13 @@ public class GameManager
 		return;}
 
         Insanity += value;
-     //   Debug.Log("Insanity:" + Insanity);
+        Debug.Log("Insanity:" + Insanity);
         if (Insanity >= 100)
         {
-            gameOver();
+            // Cap insanity instead of losing
+            // - will slow down to very slow
+            Insanity = 100;
+           //  gameOver();
         }
     }
 
@@ -74,7 +77,7 @@ public class GameManager
         {
             Insanity = 0;
         }
-      //  Debug.Log("Insanity:" + Insanity);
+        Debug.Log("Insanity:" + Insanity);
 
     }
 
