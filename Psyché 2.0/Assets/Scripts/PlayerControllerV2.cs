@@ -97,6 +97,8 @@ public class PlayerControllerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Sleeping: " +sleeping + " hiding: " + hidden + "" );
+
         timer += Time.deltaTime;
 
         if (timer >= 0.1f)
@@ -142,6 +144,8 @@ public class PlayerControllerV2 : MonoBehaviour
         if (GameManager.Instance.restart)
         {
             setBackToCheckpoint();
+            sleeping = false;
+            hidden = false;
             GameManager.Instance.restart = false;
         }
 
@@ -149,6 +153,7 @@ public class PlayerControllerV2 : MonoBehaviour
         if ( GameManager.Instance.IsGameOver)
         {
             sleeping = false;
+            hidden = false;
             sleepScreen.SetActive(false);
         }
 
@@ -324,6 +329,8 @@ public class PlayerControllerV2 : MonoBehaviour
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
             rb.velocity = new Vector2(0, rb.velocity.y);
             isWalking = false;
+            return;
+            // nciht return ?
         }
             
         if(!hidden && !sleeping)

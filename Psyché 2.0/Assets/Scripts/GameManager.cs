@@ -43,6 +43,8 @@ public class GameManager
 
     public void restartGame()
     {
+
+        // TODO: Reset all Checkpoints, or at least the saved checkpoint ? 
         IsGameOver = false;
         Time.timeScale = 1;
         Insanity = 0f;
@@ -57,7 +59,7 @@ public class GameManager
 		return;}
 
         Insanity += value;
-        Debug.Log("Insanity:" + Insanity);
+     //   Debug.Log("Insanity:" + Insanity);
         if (Insanity >= 100)
         {
             gameOver();
@@ -72,7 +74,7 @@ public class GameManager
         {
             Insanity = 0;
         }
-        Debug.Log("Insanity:" + Insanity);
+      //  Debug.Log("Insanity:" + Insanity);
 
     }
 
