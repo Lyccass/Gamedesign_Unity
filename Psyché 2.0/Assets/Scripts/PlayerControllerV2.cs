@@ -309,7 +309,7 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
         // Adjust jump force to insanity
-        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 300));
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 400));
 
         if(currentJumpforce < minimumJumpforce)
         {

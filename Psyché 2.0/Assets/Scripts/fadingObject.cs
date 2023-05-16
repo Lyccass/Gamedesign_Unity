@@ -8,7 +8,13 @@ public class fadingObject : MonoBehaviour
 {
     [SerializeField] private float lowerThreshold = 20f;
     [SerializeField] private float upperThreshold = 40f;
+    [SerializeField] private float jitterIntensity = 2f;
+    [SerializeField] private int jitterfrequency = 1;
+    [SerializeField] private bool jitter = false;
+
+    private int jitterCounter = 0;
     private Renderer renderer;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +41,22 @@ public class fadingObject : MonoBehaviour
         else
         {
             newColor.a = 0f;
+        }
+
+        if (jitter)
+        {
+            jitterCounter++;
+            if(jitterCounter >= jitterfrequency)
+            {
+                jitterCounter = 0;
+
+              
+                Vector3 shift = new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0) * jitterIntensity;
+                Vector3 newPos = gameObject.transform.position = gameObject.transform.position + shift;
+          
+            }
+            
+          
         }
         // Progress = lowerOverFlow/delta = albedo!
         
