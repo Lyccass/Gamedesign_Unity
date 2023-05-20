@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Versteckt
+    uniqueID: 3953919687
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
