@@ -18,7 +18,7 @@ public class ladder : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("1111 ladder maybe");
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") )
         {
             Player = collision.gameObject;
             canTeleport = true;
@@ -36,7 +36,7 @@ public class ladder : MonoBehaviour
 
     private void Update()
     {
-        if (canTeleport && Input.GetKeyDown(KeyCode.F))  //&& PlayerControllerV2.isGrounded
+        if (canTeleport && Input.GetKeyDown(KeyCode.F) && PlayerControllerV2.isGrounded)  //&& PlayerControllerV2.isGrounded
         {
             GameManager.Instance.isFading = true;
 

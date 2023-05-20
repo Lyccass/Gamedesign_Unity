@@ -24,7 +24,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool isFacingRight = true;
 
     private bool isWalking;
-    public bool isGrounded;
+    public static bool isGrounded;
     public bool isTouchingWall;
 
     //sleepOverlay;
@@ -97,6 +97,8 @@ public class PlayerControllerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Sleeping: " +sleeping + " hiding: " + hidden + "" );
+
         timer += Time.deltaTime;
 
         if (timer >= 0.1f)
@@ -111,7 +113,7 @@ public class PlayerControllerV2 : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.decrementInsanity(0.6f);
+                GameManager.Instance.decrementInsanity(1f);
             }
             
             timer = 0;
@@ -142,6 +144,8 @@ public class PlayerControllerV2 : MonoBehaviour
         if (GameManager.Instance.restart)
         {
             setBackToCheckpoint();
+            sleeping = false;
+            hidden = false;
             GameManager.Instance.restart = false;
         }
 
@@ -149,6 +153,7 @@ public class PlayerControllerV2 : MonoBehaviour
         if ( GameManager.Instance.IsGameOver)
         {
             sleeping = false;
+            hidden = false;
             sleepScreen.SetActive(false);
         }
 
@@ -303,8 +308,8 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             return;
         }
-
-        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 200));
+        // Adjust jump force to insanity
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 400));
 
         if(currentJumpforce < minimumJumpforce)
         {
@@ -324,17 +329,33 @@ public class PlayerControllerV2 : MonoBehaviour
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
             rb.velocity = new Vector2(0, rb.velocity.y);
             isWalking = false;
+            return;
+            // nciht return ?
         }
             
         if(!hidden && !sleeping)
         {
+            // Adjust movementspeed to Insanity
 
-            float currentSpeed = movementSpeed * (1-(GameManager.Instance.Insanity / 200));
-
-            if(currentSpeed< minimumSpeed)
+            // TODO: Maybe only above, say, 30 insanity, then decrease 
+            float insanityOverflow = GameManager.Instance.Insanity -30;
+            float multiplier = 1f;
+            if(insanityOverflow > 0)
             {
-                currentSpeed = 0;
+                multiplier =  1 - (insanityOverflow / 70);
+                if (multiplier < 0)
+                {
+                    multiplier = 0;
+                }
             }
+            float currentSpeed = movementSpeed * multiplier ;
+
+
+            // TODO: Look into further
+         //   if(currentSpeed< minimumSpeed)
+         //   {
+         //       currentSpeed = minimumSpeed;
+         //   }
 
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
         }

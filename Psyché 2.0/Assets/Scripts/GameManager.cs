@@ -44,6 +44,8 @@ public class GameManager
 
     public void restartGame()
     {
+
+        // TODO: Reset all Checkpoints, or at least the saved checkpoint ? 
         IsGameOver = false;
         Time.timeScale = 1;
         Insanity = 0f;
@@ -61,7 +63,10 @@ public class GameManager
        // Debug.Log("Insanity:" + Insanity);
         if (Insanity >= 100)
         {
-            gameOver();
+            // Cap insanity instead of losing
+            // - will slow down to very slow
+            Insanity = 100;
+           //  gameOver();
         }
     }
 
