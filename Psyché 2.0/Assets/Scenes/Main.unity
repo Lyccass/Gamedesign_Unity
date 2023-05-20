@@ -446,7 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4974e52a4f5500440aebc4332fa63719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Controls
 --- !u!114 &231289303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,7 +1693,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1444894656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4974e52a4f5500440aebc4332fa63719, type: 3}
+  m_Script: {fileID: 11500000, guid: 43fc6a01e8009364fbdc23e2518dbf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Level 1
@@ -1743,7 +1742,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1444894658}
-        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: LoadSceneButton, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
@@ -1811,7 +1810,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444894656}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03f37bf2bd7688447b0b6be4d2517ea0, type: 3}
   m_Name: 
