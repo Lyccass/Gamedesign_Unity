@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -25387183
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2075639856, guid: e030f9c09e94ee6468c178ec416ee22d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,20 +170,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d333e756acfc3ac4993eefb75dd0157b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
   isTouchingWall: 0
   sleepScreen: {fileID: 0}
+  sign: {fileID: 0}
   amountOfJumps: 1
   movementSpeed: 9
+  minimumSpeed: 4
   jumpforce: 20
+  minimumJumpforce: 10
   groundCheckRadius: 0.4
   wallCheckDistance: 0.5
-  wallSlideSpeed: 0
   movementForceInAir: 10
   airDragMultiplier: 0.95
   variableJumpHeightMulti: 0.65
-  wallHopForce: 0
-  wallJumpForce: 0
   jumpTimerSet: 0.15
   turntimerSet: 0.1
   wallHopDirection: {x: 0, y: 0}
@@ -193,6 +192,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  collider: {fileID: 0}
 --- !u!1 &3348554413278588767
 GameObject:
   m_ObjectHideFlags: 0
