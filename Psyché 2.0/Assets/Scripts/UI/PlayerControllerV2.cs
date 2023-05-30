@@ -195,6 +195,7 @@ public class PlayerControllerV2 : MonoBehaviour
             Flip();
         }
 
+  /*
         if(rb.velocity.x != 0)
         {
             isWalking = true;
@@ -204,6 +205,8 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             isWalking = false;
         }
+
+        */
       //  Debug.Log(isWalking);
     }
 
@@ -212,7 +215,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
         if (!(rb.velocity.x  > minimumSpeed || rb.velocity.x < -minimumSpeed))
         {
-            isWalking = false;
+           // isWalking = false;
         }
 
         anim.SetBool("isWalking", isWalking);
@@ -235,7 +238,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
 	}
 
-          movementInputDirection = Input.GetAxisRaw("Horizontal");
+          movementInputDirection = Input.GetAxis("Horizontal");
 
 //        Debug.Log(isGrounded);
           if (Input.GetButtonDown("Jump"))
@@ -348,8 +351,10 @@ public class PlayerControllerV2 : MonoBehaviour
                     multiplier = 0;
                 }
             }
+
             float currentSpeed = movementSpeed * multiplier ;
 
+         
 
             // TODO: Look into further
          //   if(currentSpeed< minimumSpeed)
@@ -357,7 +362,17 @@ public class PlayerControllerV2 : MonoBehaviour
          //       currentSpeed = minimumSpeed;
          //   }
 
+            if(movementInputDirection != 0)
+            {
+                isWalking = true;
+            }
+            else
+            {
+                isWalking = false;
+            }
+
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
+            
         }
     }
 
