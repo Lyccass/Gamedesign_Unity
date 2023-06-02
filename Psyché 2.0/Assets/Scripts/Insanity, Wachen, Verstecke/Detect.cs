@@ -6,7 +6,7 @@ using UnityEngine;
 public class Detect : MonoBehaviour
 {
     // Start is called before the first frame update
-    bool hidden = false;
+   // bool hidden = false;
 
 
 

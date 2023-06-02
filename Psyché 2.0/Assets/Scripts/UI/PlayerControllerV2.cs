@@ -35,6 +35,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public GameObject sign;
     public GameObject f;
     public GameObject z;
+    public GameObject warn;
     // Info
     //private bool canMove = true;
     private bool canFlip = true;
@@ -44,6 +45,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     //
     public static bool sleeping;
+    public static bool warning;
 
     private bool ducking = false;
 
@@ -92,6 +94,7 @@ public class PlayerControllerV2 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playercollider = GetComponent<BoxCollider2D>();
+        warning = false;
         //  amountOfJumpsLeft = amountOfJumps;
         //  wallHopDirection.Normalize();
         //   wallJumpDirection.Normalize();
@@ -128,6 +131,8 @@ public class PlayerControllerV2 : MonoBehaviour
 
             timer = 0;
         }
+
+      
 
         if (hidden)
         {
@@ -167,7 +172,16 @@ public class PlayerControllerV2 : MonoBehaviour
             sleepScreen.SetActive(false);
         }
 
-
+        if (warning)
+        {
+            z.SetActive(false);
+            f.SetActive(false);
+            setSignWarn(true);
+        }
+        else
+        {
+            setSignWarn(false);
+        }
     }
 
     private void FixedUpdate()
@@ -455,6 +469,8 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private void setSignF(bool value)
     {
+        if (warning) return;
+
         if (z.activeSelf || sleeping)
         {
             // Z overrides f
@@ -467,7 +483,13 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void setSignZ(bool value)
     {
+        if (warning) return;
         sign.SetActive(value);
         z.SetActive(value);
+    }
+    private void setSignWarn(bool value)
+    {
+        sign.SetActive(value);
+        warn.SetActive(value);
     }
 }
