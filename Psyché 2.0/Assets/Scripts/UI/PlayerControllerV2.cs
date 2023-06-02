@@ -180,6 +180,9 @@ public class PlayerControllerV2 : MonoBehaviour
         }
         else
         {
+            // Problem: auch wenn z oder f an, wird hier das sign deaktiviert!
+            //  soll ausgehen wenn weder z noch f.
+            // soll anbleiben wenn 1 von beiden
             setSignWarn(false);
         }
     }
@@ -489,7 +492,15 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void setSignWarn(bool value)
     {
-        sign.SetActive(value);
+
         warn.SetActive(value);
+        sign.SetActive(value);
+
+        if (f.activeSelf || z.activeSelf)
+        {
+             sign.SetActive(true);
+        }
+       
+
     }
 }
