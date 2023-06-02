@@ -13,13 +13,13 @@ public class fadingObject : MonoBehaviour
     [SerializeField] private bool jitter = false;
 
     private int jitterCounter = 0;
-    private Renderer renderer;
+    private Renderer objectrenderer;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        renderer = gameObject.GetComponent<Renderer>();
+        objectrenderer = gameObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class fadingObject : MonoBehaviour
         float thresholdDelta = upperThreshold - lowerThreshold;
         float lowerOverflow = GameManager.Instance.Insanity - lowerThreshold;
         //If lowerThreshold is reached
-        Color newColor = renderer.material.color;
+        Color newColor = objectrenderer.material.color;
 
         if (lowerOverflow > 0)
         {
@@ -60,7 +60,7 @@ public class fadingObject : MonoBehaviour
         }
         // Progress = lowerOverFlow/delta = albedo!
         
-       renderer.material.color = newColor;
+       objectrenderer.material.color = newColor;
 
     }
 }

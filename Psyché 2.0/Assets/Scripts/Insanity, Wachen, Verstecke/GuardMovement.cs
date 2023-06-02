@@ -24,7 +24,7 @@ public class GuardMovement : MonoBehaviour
     private bool isTouchingWall = false;
     private Vector2 direction = Vector2.left;
 
-    private BoxCollider2D collider;
+    private BoxCollider2D guardcollider;
     //  public GameObject guard;
 
 
@@ -35,7 +35,7 @@ public class GuardMovement : MonoBehaviour
         position = initialPosition;
         leftBorder = initialPosition.x - walkRange;
         rightBorder = initialPosition.x + walkRange;
-        collider = GetComponent<BoxCollider2D>();
+        guardcollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame

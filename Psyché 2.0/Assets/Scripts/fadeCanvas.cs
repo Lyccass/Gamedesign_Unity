@@ -15,7 +15,7 @@ public class fadeCanvas : MonoBehaviour
     public GameObject image;
     float count = 0;
     float maxCount = 12;
-    bool positive = true;
+   // ?  bool positive = true;
     bool delay = false;
 
     void Start()

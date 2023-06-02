@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class insanityManager : MonoBehaviour
 {
-    private static insanityManager instance = null;
+   // private static insanityManager instance = null;
     private static float insanity = 0f;
     private static float timer = 0f;
 

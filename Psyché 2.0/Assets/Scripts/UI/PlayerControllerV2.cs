@@ -8,17 +8,17 @@ public class PlayerControllerV2 : MonoBehaviour
 {
 
     // Der scheiﬂ funzt doch safe nicht..
-  /*  private static PlayerControllerV2 instance;
+    /*  private static PlayerControllerV2 instance;
 
-        public static PlayerControllerV2 Instance
-        {
+          public static PlayerControllerV2 Instance
+          {
 
-             get
-              {
-                if (instance == null) instance = new PlayerControllerV2();
-                return instance;
-             }
-         }*/
+               get
+                {
+                  if (instance == null) instance = new PlayerControllerV2();
+                  return instance;
+               }
+           }*/
 
     private float movementInputDirection;
     private bool isFacingRight = true;
@@ -29,12 +29,14 @@ public class PlayerControllerV2 : MonoBehaviour
 
     //sleepOverlay;
 
-  
-    public GameObject sleepScreen;
-    public GameObject sign;
 
+    public GameObject sleepScreen;
+    // TODO: immer bei sign auch f anzeigen!
+    public GameObject sign;
+    public GameObject f;
+    public GameObject z;
     // Info
-    private bool canMove = true;
+    //private bool canMove = true;
     private bool canFlip = true;
 
     // Dann an den stellen jeweils playercontrollerv2.hidden = true
@@ -52,7 +54,8 @@ public class PlayerControllerV2 : MonoBehaviour
     private int facingDirection = 1;
 
     public float movementSpeed = 8f;
-    public float minimumSpeed =  4f;
+    public float minimumSpeed = 4f;
+    public float insanityMovementThreshold = 50f;
 
     public float jumpforce = 16.0f;
     public float minimumJumpforce = 10f;
@@ -60,7 +63,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public float groundCheckRadius;
     public float wallCheckDistance;
-   // public float wallSlideSpeed;
+    // public float wallSlideSpeed;
     public float movementForceInAir;
     public float airDragMultiplier = 0.95f;
     public float variableJumpHeightMulti = 0.5f;
@@ -68,7 +71,7 @@ public class PlayerControllerV2 : MonoBehaviour
     //public float wallJumpForce;
     public float jumpTimerSet = 0.15f;
     public float turntimerSet = 0.1f;
-    
+
 
     private float timer = 0f;
 
@@ -81,17 +84,17 @@ public class PlayerControllerV2 : MonoBehaviour
     public Transform wallCheck;
     public LayerMask whatIsGround;
 
-    public BoxCollider2D collider;
+    private BoxCollider2D playercollider;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        collider = GetComponent<BoxCollider2D>();
-      //  amountOfJumpsLeft = amountOfJumps;
-      //  wallHopDirection.Normalize();
-     //   wallJumpDirection.Normalize();
+        playercollider = GetComponent<BoxCollider2D>();
+        //  amountOfJumpsLeft = amountOfJumps;
+        //  wallHopDirection.Normalize();
+        //   wallJumpDirection.Normalize();
     }
 
     // Update is called once per frame
@@ -110,12 +113,19 @@ public class PlayerControllerV2 : MonoBehaviour
             if (!sleeping)
             {
                 GameManager.Instance.addInsanity(0.2f);
+                if (GameManager.Instance.Insanity > 50)
+                {
+                    setSignZ(true);
+                    setSignF(false);
+                }
             }
             else
             {
+
+                setSignZ(false);
                 GameManager.Instance.decrementInsanity(1f);
             }
-            
+
             timer = 0;
         }
 
@@ -123,8 +133,8 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Hidden";
             isWalking = false;
-            sign.SetActive(false);
-
+            setSignF(false);
+            setSignZ(false);
         }
         else
         {
@@ -150,7 +160,7 @@ public class PlayerControllerV2 : MonoBehaviour
         }
 
 
-        if ( GameManager.Instance.IsGameOver)
+        if (GameManager.Instance.IsGameOver)
         {
             sleeping = false;
             hidden = false;
@@ -179,53 +189,53 @@ public class PlayerControllerV2 : MonoBehaviour
     // Flip rotates the model to the other direction
     private void checkMovementDirection()
     {
-    
-        if(hidden || sleeping)
+
+        if (hidden || sleeping)
         {
             // Dont flip ewhen sleeping/hiding
             return;
         }
 
-        if(isFacingRight && movementInputDirection < 0)
+        if (isFacingRight && movementInputDirection < 0)
         {
             Flip();
         }
-        else if(!isFacingRight && movementInputDirection > 0)
+        else if (!isFacingRight && movementInputDirection > 0)
         {
             Flip();
         }
 
-  /*
-        if(rb.velocity.x != 0)
-        {
-            isWalking = true;
-        }
+        /*
+              if(rb.velocity.x != 0)
+              {
+                  isWalking = true;
+              }
 
-        else
-        {
-            isWalking = false;
-        }
+              else
+              {
+                  isWalking = false;
+              }
 
-        */
-      //  Debug.Log(isWalking);
+              */
+        //  Debug.Log(isWalking);
     }
 
     private void UpdateAnimations()
     {
 
-        if (!(rb.velocity.x  > minimumSpeed || rb.velocity.x < -minimumSpeed))
+        if (!(rb.velocity.x > minimumSpeed || rb.velocity.x < -minimumSpeed))
         {
-           // isWalking = false;
+            // isWalking = false;
         }
 
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
-   
-       // anim.SetBool("isWall", IsWallSliding);
+
+        // anim.SetBool("isWall", IsWallSliding);
     }
 
-    
+
     private void CheckInput()
     {
         if (GameManager.Instance.IsGameOver)
@@ -233,26 +243,28 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
 
-	if(Input.GetKeyDown(KeyCode.L)){
-		GameManager.Instance.cheats = !GameManager.Instance.cheats;
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.cheats = !GameManager.Instance.cheats;
 
-	}
+        }
 
-          movementInputDirection = Input.GetAxis("Horizontal");
+        movementInputDirection = Input.GetAxis("Horizontal");
 
-//        Debug.Log(isGrounded);
-          if (Input.GetButtonDown("Jump"))
-          {
-              if(isGrounded )
-              {
-                  NormalJump();
-              }
+        //        Debug.Log(isGrounded);
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (isGrounded)
+            {
+                NormalJump();
+            }
 
-          }
+        }
 
-          //TODO: Provide right button
+        //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden ){
+        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden)
+        {
 
 
             if (sleeping)
@@ -279,9 +291,9 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             unduck();
         }
-        
+
     }
-    
+
 
     private void hide()
     {
@@ -293,7 +305,7 @@ public class PlayerControllerV2 : MonoBehaviour
         // TODO: use animation to transit to ducking sprite
 
         // half height
-        collider.size *= new Vector2(1f, 0.5f);
+        playercollider.size *= new Vector2(1f, 0.5f);
         // half speed
         movementSpeed *= 0.5f;
     }
@@ -301,7 +313,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private void unduck()
     {
         // double height
-        collider.size *= new Vector2(1f,2f);
+        playercollider.size *= new Vector2(1f, 2f);
         movementSpeed *= 2f;
 
     }
@@ -314,14 +326,14 @@ public class PlayerControllerV2 : MonoBehaviour
         // Adjust jump force to insanity
         float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 400));
 
-        if(currentJumpforce < minimumJumpforce)
+        if (currentJumpforce < minimumJumpforce)
         {
             currentJumpforce = 0;
         }
-            rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
-            //amountOfJumpsLeft--;
-           // isAttemptinToJump = false;
-           // checkjumpMulti = true;
+        rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
+        //amountOfJumpsLeft--;
+        // isAttemptinToJump = false;
+        // checkjumpMulti = true;
 
     }
     private void ApplyMovement()
@@ -335,34 +347,34 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
             // nciht return ?
         }
-            
-        if(!hidden && !sleeping)
+
+        if (!hidden && !sleeping)
         {
             // Adjust movementspeed to Insanity
 
             // TODO: Maybe only above, say, 30 insanity, then decrease 
-            float insanityOverflow = GameManager.Instance.Insanity -30;
+            float insanityOverflow = GameManager.Instance.Insanity - insanityMovementThreshold;
             float multiplier = 1f;
-            if(insanityOverflow > 0)
+            if (insanityOverflow > 0)
             {
-                multiplier =  1 - (insanityOverflow / 70);
+                multiplier = 1 - (insanityOverflow / (100f - insanityMovementThreshold));
                 if (multiplier < 0)
                 {
                     multiplier = 0;
                 }
             }
 
-            float currentSpeed = movementSpeed * multiplier ;
+            float currentSpeed = movementSpeed * multiplier;
 
-         
+
 
             // TODO: Look into further
-         //   if(currentSpeed< minimumSpeed)
-         //   {
-         //       currentSpeed = minimumSpeed;
-         //   }
+            //   if(currentSpeed< minimumSpeed)
+            //   {
+            //       currentSpeed = minimumSpeed;
+            //   }
 
-            if(movementInputDirection != 0)
+            if (movementInputDirection != 0)
             {
                 isWalking = true;
             }
@@ -372,21 +384,24 @@ public class PlayerControllerV2 : MonoBehaviour
             }
 
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
-            
+
         }
     }
 
     private void Flip()
     {
-        
+
         if (canFlip)
         {
             Debug.Log("Flipped!");
             facingDirection *= -1;
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);
+            // Rotate f and z by 360 in total
+            f.transform.Rotate(0.0f, 180.0f, 0.0f);
+            z.transform.Rotate(0.0f, 180.0f, 0.0f);
         }
-        
+
     }
 
 
@@ -403,11 +418,11 @@ public class PlayerControllerV2 : MonoBehaviour
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
     }
 
-    private void OnTriggerExit2D(Collider2D collision )
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("triggerSign") && !hidden)
         {
-            sign.SetActive(false);
+            setSignF(false);
         }
     }
 
@@ -415,25 +430,44 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("triggerSign") && !hidden)
         {
-            sign.SetActive(true);
-        } 
+            setSignF(true);
+        }
         else
         {
-            sign.SetActive(false);
+            setSignF(false);
         }
 
     }
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("triggerSign") && !hidden)
         {
-            sign.SetActive(true);
+            setSignF(true);
         }
         if (collision.gameObject.CompareTag("triggerSign") && hidden)
         {
-            sign.SetActive(false);
+            setSignF(false);
         }
 
+    }
+
+    private void setSignF(bool value)
+    {
+        if (z.activeSelf || sleeping)
+        {
+            // Z overrides f
+            f.SetActive(false);
+            return;
+        }
+        else
+            sign.SetActive(value);
+        f.SetActive(value);
+    }
+    private void setSignZ(bool value)
+    {
+        sign.SetActive(value);
+        z.SetActive(value);
     }
 }

@@ -13,7 +13,7 @@ public class ladder : MonoBehaviour
     //public bool onGround;
 
     private bool canTeleport; // flag to indicate if the player can teleport
-    public GameObject Player;
+    private GameObject Player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,7 +22,7 @@ public class ladder : MonoBehaviour
         {
             Player = collision.gameObject;
             canTeleport = true;
-            //Debug.Log("2222 ladder maybe");
+            Debug.Log("2222 ladder maybe");
         }
     }
 
