@@ -6,21 +6,25 @@ public class Key : MonoBehaviour
 {
     public int keyID; // a unique ID for each key
     private bool canInteract = false;
+    private Sprite sprite;
 
+
+    private void Start()
+    {
+        SpriteRenderer sr =  gameObject.GetComponent<SpriteRenderer>();
+        sprite = sr.sprite;
+    }
     private void Update()
     {
-        if ( canInteract && Input.GetKeyDown(KeyCode.F))
+        if (canInteract && Input.GetKeyDown(KeyCode.F))
         {
             // add the key to the player's inventory
-            Inventory.instance.AddKey(keyID);
+            Inventory.instance.AddKey(keyID,sprite);
 
             Debug.Log("Key Collected");
-
-            // remove the key from the scene
+            // Remove the key from the scene
             Destroy(gameObject);
-        }
-
-
+        } 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
