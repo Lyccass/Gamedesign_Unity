@@ -13,7 +13,7 @@ public class Door : MonoBehaviour
         {
             if (GameObject.Find("Lock" + lockID.ToString()) != null)
             {
-                //gameObject.SetActive(false);
+               // gameObject.SetActive(false);
                 return;
             }
         }
@@ -29,10 +29,12 @@ public class Door : MonoBehaviour
         {
             if (GameObject.Find("Lock" + lockID.ToString()) != null)
             {
+                Debug.Log("Lock" + lockID.ToString() + " exists");
                 // this lock still exists, so the door should be disabled
                 //gameObject.SetActive(false);
                 return;
             }
+        
         }
 
         // all connected locks have been removed, so enable the door

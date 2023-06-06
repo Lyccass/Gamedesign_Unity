@@ -33,7 +33,7 @@ public class Lock : MonoBehaviour
                 // open the door if all locks have been removed
                 if (allLocksRemoved)
                 {
-                    OpenDoor();
+                    OpenDoor();  // does nothing oder so
                 }
             }
             else
@@ -41,7 +41,9 @@ public class Lock : MonoBehaviour
                 // remove the lock if the player has the specific key for it
                 if (Inventory.instance.HasKey(lockID))
                 {
+                    Inventory.instance.RemoveKey(lockID);
                     Debug.Log("Lock Opened");
+                    
                     Destroy(gameObject);
                 }
             }
@@ -69,6 +71,6 @@ public class Lock : MonoBehaviour
 
     private void OpenDoor()
     {
-        // put your code here to open the door
+        // ?!? put your code here to open the door
     }
 }
