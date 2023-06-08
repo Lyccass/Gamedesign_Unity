@@ -26,6 +26,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private bool isWalking;
     public static bool isGrounded;
     public bool isTouchingWall;
+   
 
     //sleepOverlay;
 
@@ -46,6 +47,7 @@ public class PlayerControllerV2 : MonoBehaviour
     //
     public static bool sleeping;
     public static bool warning;
+    
 
     private bool ducking = false;
 
@@ -248,6 +250,8 @@ public class PlayerControllerV2 : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
+        anim.SetBool("isResting", sleeping);
+        anim.SetBool("isDucking", ducking);
 
         // anim.SetBool("isWall", IsWallSliding);
     }
@@ -320,7 +324,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private void duck()
     {
         // TODO: use animation to transit to ducking sprite
-
+        ducking = true;
         // half height
         playercollider.size *= new Vector2(1f, 0.5f);
         // half speed
@@ -329,6 +333,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private void unduck()
     {
+        ducking = false;
         // double height
         playercollider.size *= new Vector2(1f, 2f);
         movementSpeed *= 2f;
