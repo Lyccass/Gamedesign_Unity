@@ -12,30 +12,38 @@ public class ladder : MonoBehaviour
 
     //public bool onGround;
 
+    private bool contact;
     private bool canTeleport; // flag to indicate if the player can teleport
     private GameObject Player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("1111 ladder maybe");
-        if (collision.CompareTag("Player") )
+        if (collision.CompareTag("Player"))
         {
             Player = collision.gameObject;
             canTeleport = true;
+            contact = true;
             Debug.Log("2222 ladder maybe");
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             canTeleport = false;
+            contact = false;
         }
     }
 
     private void Update()
     {
+        if (contact && PlayerControllerV2.sleeping) canTeleport = false;
+        if (contact && !PlayerControllerV2.sleeping && !canTeleport) canTeleport = true;
+
+
         if (canTeleport && Input.GetKeyDown(KeyCode.F) && PlayerControllerV2.isGrounded)  //&& PlayerControllerV2.isGrounded
         {
             GameManager.Instance.isFading = true;
