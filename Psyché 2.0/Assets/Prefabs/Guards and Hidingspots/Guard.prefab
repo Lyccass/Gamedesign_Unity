@@ -198,12 +198,12 @@ SpriteRenderer:
   m_SortingLayerID: -25387183
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 44dbe08f9742e4e449d6700f648531a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4c0eb6890cd59745a46e24a1217a1b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -278,12 +278,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d00583c4201020438245e720395cd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkRange: 12
+  walkRange: 10
   ground:
     serializedVersion: 2
     m_Bits: 64
   distanceToWall: 1
-  speed: 3
+  speed: 2
 --- !u!212 &1503746016
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -408,8 +408,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -25387183
-  m_SortingLayer: 4
+  m_SortingLayerID: 1296102461
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3eb623898a37a704e8383bfb50b4023d, type: 3}
   m_Color: {r: 0.8396226, g: 0.6900258, b: 0.3062774, a: 0.60784316}
