@@ -25,8 +25,10 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private bool isWalking;
     public static bool isGrounded;
+    public bool isStaired = false;
     public bool isTouchingWall;
    
+
 
     //sleepOverlay;
 
@@ -53,6 +55,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    private BoxCollider2D coll;
 
     public int amountOfJumps = 1;
     private int facingDirection = 1;
@@ -86,7 +89,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public Transform groundCheck;
     public Transform wallCheck;
+    public Transform stairCheck;
     public LayerMask whatIsGround;
+    public LayerMask whatIsStair;
+
+    private GameObject currentStair = null;
 
     private BoxCollider2D playercollider;
 
@@ -97,6 +104,7 @@ public class PlayerControllerV2 : MonoBehaviour
         anim = GetComponent<Animator>();
         playercollider = GetComponent<BoxCollider2D>();
         warning = false;
+        coll = GetComponent<BoxCollider2D>();
         //  amountOfJumpsLeft = amountOfJumps;
         //  wallHopDirection.Normalize();
         //   wallJumpDirection.Normalize();
@@ -202,8 +210,23 @@ public class PlayerControllerV2 : MonoBehaviour
         // kind of replaces onCollision()
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         isTouchingWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, whatIsGround);
-    }
+      //  isStaired =  Physics2D.OverlapCircle(stairCheck.position, groundCheckRadius, whatIsStair);
 
+        Debug.Log("Stasired: " + isStaired);
+
+        if (isStaired)
+        {
+            // Tatsächlich kommt hier colider!
+       //   currentStair = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsStair).gameObject;
+          //  Debug.Log(currentStair.name);
+            // currentStair.transform.parent.gameObject.c
+
+
+        }
+
+        // TODO: if rb .velocity = down (und not grounded), staircollider = true;
+        // -> wenn normal laufen, passiert nix
+    }
 
     // Flip rotates the model to the other direction
     private void checkMovementDirection()
@@ -271,6 +294,15 @@ public class PlayerControllerV2 : MonoBehaviour
         }
 
         movementInputDirection = Input.GetAxis("Horizontal");
+        if(movementInputDirection != 0)
+        {
+            coll.sharedMaterial.friction = 0;
+        }
+        else
+        {
+            coll.sharedMaterial.friction = 500f;
+        }
+
 
         //        Debug.Log(isGrounded);
         if (Input.GetButtonDown("Jump"))
@@ -399,10 +431,12 @@ public class PlayerControllerV2 : MonoBehaviour
             if (movementInputDirection != 0)
             {
                 isWalking = true;
+                
             }
             else
             {
                 isWalking = false;
+               // coll.sharedMaterial.friction = 50f;
             }
 
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
