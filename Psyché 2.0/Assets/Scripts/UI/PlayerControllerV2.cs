@@ -172,6 +172,7 @@ public class PlayerControllerV2 : MonoBehaviour
             sleeping = false;
             hidden = false;
             GameManager.Instance.restart = false;
+            anim.SetBool("isDead", false);
         }
 
 
@@ -180,6 +181,8 @@ public class PlayerControllerV2 : MonoBehaviour
             sleeping = false;
             hidden = false;
             sleepScreen.SetActive(false);
+            anim.SetBool("isDead", true);
+            
         }
 
         if (warning)
@@ -294,7 +297,7 @@ public class PlayerControllerV2 : MonoBehaviour
         }
 
         movementInputDirection = Input.GetAxis("Horizontal");
-        if(movementInputDirection != 0)
+       /* if(movementInputDirection != 0)
         {
             coll.sharedMaterial.friction = 0;
         }
@@ -302,7 +305,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             coll.sharedMaterial.friction = 500f;
         }
-
+       */
 
         //        Debug.Log(isGrounded);
         if (Input.GetButtonDown("Jump"))
@@ -358,7 +361,7 @@ public class PlayerControllerV2 : MonoBehaviour
         // TODO: use animation to transit to ducking sprite
         ducking = true;
         // half height
-        playercollider.size *= new Vector2(1f, 0.5f);
+        // playercollider.size *= new Vector2(1f, 0.5f);
         // half speed
         movementSpeed *= 0.5f;
     }
@@ -367,7 +370,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         ducking = false;
         // double height
-        playercollider.size *= new Vector2(1f, 2f);
+        //playercollider.size *= new Vector2(1f, 2f);
         movementSpeed *= 2f;
 
     }
@@ -393,7 +396,7 @@ public class PlayerControllerV2 : MonoBehaviour
     private void ApplyMovement()
     {
 
-        if (sleeping || hidden)
+        if (sleeping || hidden || GameManager.Instance.IsGameOver)
         {
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
             rb.velocity = new Vector2(0, rb.velocity.y);
