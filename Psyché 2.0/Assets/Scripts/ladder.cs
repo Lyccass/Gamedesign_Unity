@@ -47,7 +47,7 @@ public class ladder : MonoBehaviour
         if (canTeleport && Input.GetKeyDown(KeyCode.F) && PlayerControllerV2.isGrounded)  //&& PlayerControllerV2.isGrounded
         {
             GameManager.Instance.isFading = true;
-
+            fadeCanvas.fadeSpeed = 0.001f;
         }
 
         if (canTeleport && fadeCanvas.alpha >= 1)  //&& PlayerControllerV2.isGrounded

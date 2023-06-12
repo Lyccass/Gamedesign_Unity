@@ -22,6 +22,7 @@ public class LevelEndObject : MonoBehaviour
         if (triggerActive && Input.GetKeyDown(KeyCode.F) && PlayerControllerV2.isGrounded)
         {
             GameManager.Instance.isFading = true;
+            fadeCanvas.fadeSpeed = 0.0005f;
 
         }
 
