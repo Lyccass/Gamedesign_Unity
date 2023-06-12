@@ -25,7 +25,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private bool isWalking;
     public static bool isGrounded;
-    public bool isStaired = false;
+    public static bool isStaired = false;
     public bool isTouchingWall;
    
 
@@ -81,6 +81,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
 
     private float timer = 0f;
+    private Vector2 freezePos = new Vector2(-1,-1);
 
 
 
@@ -195,13 +196,17 @@ public class PlayerControllerV2 : MonoBehaviour
             // soll anbleiben wenn 1 von beiden
             setSignWarn(false);
         }
+        ApplyMovement();
+        freezePos = rb.position;
     }
 
     private void FixedUpdate()
     {
         UpdateAnimations();
-        ApplyMovement();
+        
+        
         CheckSurrondings();
+      
 
     }
 
@@ -210,9 +215,10 @@ public class PlayerControllerV2 : MonoBehaviour
         // kind of replaces onCollision()
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         isTouchingWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, whatIsGround);
-      //  isStaired =  Physics2D.OverlapCircle(stairCheck.position, groundCheckRadius, whatIsStair);
-
+    
         Debug.Log("Stasired: " + isStaired);
+
+
 
         if (isStaired)
         {
@@ -270,7 +276,26 @@ public class PlayerControllerV2 : MonoBehaviour
             // isWalking = false;
         }
 
+        // if (!(isStaired && movementInputDirection == 0))
+        // {
+
+
+
+        if (movementInputDirection != 0)
+        {
+            isWalking = true;
+
+        }
+        else
+        {
+            isWalking = false;
+            // coll.sharedMaterial.friction = 50f;
+        }
+
+
         anim.SetBool("isWalking", isWalking);
+       // }
+            
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
         anim.SetBool("isResting", sleeping);
@@ -294,20 +319,24 @@ public class PlayerControllerV2 : MonoBehaviour
         }
 
         movementInputDirection = Input.GetAxis("Horizontal");
-        if(movementInputDirection != 0)
+   
+     /*   
+        if( isStaired && movementInputDirection == 0)
         {
-            coll.sharedMaterial.friction = 0;
+            coll.sharedMaterial.friction = 50f;
+            
         }
         else
         {
-            coll.sharedMaterial.friction = 500f;
+           coll.sharedMaterial.friction = 0;
         }
-
+     */
+        
 
         //        Debug.Log(isGrounded);
         if (Input.GetButtonDown("Jump"))
         {
-            if (isGrounded)
+            if (isGrounded||isStaired)
             {
                 NormalJump();
             }
@@ -316,7 +345,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
         //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden)
+        if (Input.GetKeyDown(KeyCode.Z) && (isGrounded || isStaired) && !hidden)
         {
 
 
@@ -392,6 +421,29 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void ApplyMovement()
     {
+//         Debug.Log("Poops");
+
+
+
+
+        if (isStaired && movementInputDirection == 0 )
+        {
+            rb.position = freezePos;
+            rb.velocity = new Vector2(0, 0);
+
+
+            
+
+
+            Debug.Log("Poops");
+           // rb.bodyType = RigidbodyType2D.Kinematic;// = new Vector2(0, 0);
+            
+           return;
+        }
+        else
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
 
         if (sleeping || hidden)
         {
@@ -427,17 +479,8 @@ public class PlayerControllerV2 : MonoBehaviour
             //   {
             //       currentSpeed = minimumSpeed;
             //   }
+            
 
-            if (movementInputDirection != 0)
-            {
-                isWalking = true;
-                
-            }
-            else
-            {
-                isWalking = false;
-               // coll.sharedMaterial.friction = 50f;
-            }
 
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
 

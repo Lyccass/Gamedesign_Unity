@@ -30,7 +30,7 @@ public class StairStuff : MonoBehaviour
                 Debug.Log("staitrigger object da!");
                 //TODO: Fix access , cant access scrpit
                 
-                stairtrigger.GetComponent<StairTrigger>().toggleStairCollider(true);
+               // stairtrigger.GetComponent<StairTrigger>().toggleStairCollider(true);
             }
             
 
