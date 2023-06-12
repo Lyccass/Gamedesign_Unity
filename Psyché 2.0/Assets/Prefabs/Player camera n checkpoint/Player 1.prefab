@@ -452,7 +452,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7298457967667446522}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 6cc667b39f1e2e048a3a967da69faeed, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d333e756acfc3ac4993eefb75dd0157b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStaired: 0
   isTouchingWall: 0
   sleepScreen: {fileID: 0}
   sign: {fileID: 7298457967053434189}
@@ -546,9 +547,13 @@ MonoBehaviour:
   wallJumpDirection: {x: 0, y: 0}
   groundCheck: {fileID: 7298457968389237544}
   wallCheck: {fileID: 7298457967834748039}
+  stairCheck: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  whatIsStair:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7298457968037327530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8579ef035170dc4b8176500d4481be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 0.0005
   image: {fileID: 0}
 --- !u!1 &7298457967834748038
 GameObject:
