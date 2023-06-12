@@ -4407,9 +4407,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowerThreshold: 20
   upperThreshold: 60
-  jitterIntensity: 0.04
-  jitterfrequency: 1
-  jitter: 1
+  jitterIntensity: 0.01
+  jitterfrequency: 10
+  jitter: 0
 --- !u!212 &745378795
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4470,7 +4470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745378793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.35, y: -103.68, z: 0}
+  m_LocalPosition: {x: -26.484, y: -103.823, z: 0}
   m_LocalScale: {x: 0.5606019, y: 0.5606019, z: 0.5606019}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -10839,7 +10839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.009460449, y: 0}
+  m_AnchoredPosition: {x: 0.009521484, y: 0}
   m_SizeDelta: {x: -1741.73, y: -980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1951686726
@@ -11532,7 +11532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1113934671493391599, guid: c3a555d78c15f02468d2e5eac6ce3c7a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3a555d78c15f02468d2e5eac6ce3c7a, type: 3}
@@ -13356,11 +13356,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7298457967667446468, guid: c9631bee59264b746bcd312a87219cd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.4
+      value: -50.5
       objectReference: {fileID: 0}
     - target: {fileID: 7298457967667446468, guid: c9631bee59264b746bcd312a87219cd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -102.8
+      value: -101.5
       objectReference: {fileID: 0}
     - target: {fileID: 7298457967667446468, guid: c9631bee59264b746bcd312a87219cd9, type: 3}
       propertyPath: m_LocalPosition.z
