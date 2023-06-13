@@ -8,7 +8,7 @@ public class fadeCanvas : MonoBehaviour
 
     //public GameObject fadeScreen;
     //public Material material;
-    public float fadeSpeed = 0.15f;
+    public static float fadeSpeed;
     public static float alpha = 0.0f;
     private Image fader;
     private float saveTime;

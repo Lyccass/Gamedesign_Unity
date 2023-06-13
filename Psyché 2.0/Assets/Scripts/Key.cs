@@ -6,6 +6,7 @@ public class Key : MonoBehaviour
 {
     public int keyID; // a unique ID for each key
     private bool canInteract = false;
+    private bool contact;
     private Sprite sprite;
 
 
@@ -16,6 +17,9 @@ public class Key : MonoBehaviour
     }
     private void Update()
     {
+        if (contact && PlayerControllerV2.sleeping) canInteract = false;
+        if (contact && !PlayerControllerV2.sleeping && !canInteract) canInteract = true;
+
         if (canInteract && Input.GetKeyDown(KeyCode.F))
         {
             // add the key to the player's inventory
@@ -32,6 +36,8 @@ public class Key : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             canInteract = true;
+            contact = true;
+            
         Debug.Log("Maybe Key");
         }
        
@@ -42,6 +48,7 @@ public class Key : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             canInteract = false;
+            contact = false;
             Debug.Log("Key no more");
         }
     }

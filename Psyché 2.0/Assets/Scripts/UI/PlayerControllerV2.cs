@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerControllerV2 : MonoBehaviour
 {
 
-    // Der scheiß funzt doch safe nicht..
+    // Der scheiï¿½ funzt doch safe nicht..
     /*  private static PlayerControllerV2 instance;
 
           public static PlayerControllerV2 Instance
@@ -25,7 +25,10 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private bool isWalking;
     public static bool isGrounded;
+    public static bool isStaired = false;
     public bool isTouchingWall;
+   
+
 
     //sleepOverlay;
 
@@ -46,11 +49,13 @@ public class PlayerControllerV2 : MonoBehaviour
     //
     public static bool sleeping;
     public static bool warning;
+    
 
     private bool ducking = false;
 
     private Rigidbody2D rb;
     private Animator anim;
+    private BoxCollider2D coll;
 
     public int amountOfJumps = 1;
     private int facingDirection = 1;
@@ -76,6 +81,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
 
     private float timer = 0f;
+    private Vector2 freezePos = new Vector2(-1,-1);
 
 
 
@@ -84,7 +90,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public Transform groundCheck;
     public Transform wallCheck;
+    public Transform stairCheck;
     public LayerMask whatIsGround;
+    public LayerMask whatIsStair;
+
+    private GameObject currentStair = null;
 
     private BoxCollider2D playercollider;
 
@@ -95,6 +105,7 @@ public class PlayerControllerV2 : MonoBehaviour
         anim = GetComponent<Animator>();
         playercollider = GetComponent<BoxCollider2D>();
         warning = false;
+        coll = GetComponent<BoxCollider2D>();
         //  amountOfJumpsLeft = amountOfJumps;
         //  wallHopDirection.Normalize();
         //   wallJumpDirection.Normalize();
@@ -149,7 +160,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
         }
         //TODO: hidden flag entfernen, durch canmove ersetzen! canmove wird dann bei interact mit versteck false/treu gesetzt, oder beim schlafen!
-        // Hidden bleibt aber trotzdem erhalten, um wachen-collision auszuschalten, die prüfen dann auf player.instance.hidden
+        // Hidden bleibt aber trotzdem erhalten, um wachen-collision auszuschalten, die prï¿½fen dann auf player.instance.hidden
 
         CheckInput();
         checkMovementDirection();
@@ -162,6 +173,7 @@ public class PlayerControllerV2 : MonoBehaviour
             sleeping = false;
             hidden = false;
             GameManager.Instance.restart = false;
+            anim.SetBool("isDead", false);
         }
 
 
@@ -170,6 +182,8 @@ public class PlayerControllerV2 : MonoBehaviour
             sleeping = false;
             hidden = false;
             sleepScreen.SetActive(false);
+            anim.SetBool("isDead", true);
+            
         }
 
         if (warning)
@@ -185,13 +199,17 @@ public class PlayerControllerV2 : MonoBehaviour
             // soll anbleiben wenn 1 von beiden
             setSignWarn(false);
         }
+        ApplyMovement();
+        freezePos = rb.position;
     }
 
     private void FixedUpdate()
     {
         UpdateAnimations();
-        ApplyMovement();
+        
+        
         CheckSurrondings();
+      
 
     }
 
@@ -200,8 +218,24 @@ public class PlayerControllerV2 : MonoBehaviour
         // kind of replaces onCollision()
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         isTouchingWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, whatIsGround);
-    }
+    
+        Debug.Log("Stasired: " + isStaired);
 
+
+
+        if (isStaired)
+        {
+            // Tatsï¿½chlich kommt hier colider!
+       //   currentStair = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsStair).gameObject;
+          //  Debug.Log(currentStair.name);
+            // currentStair.transform.parent.gameObject.c
+
+
+        }
+
+        // TODO: if rb .velocity = down (und not grounded), staircollider = true;
+        // -> wenn normal laufen, passiert nix
+    }
 
     // Flip rotates the model to the other direction
     private void checkMovementDirection()
@@ -245,9 +279,30 @@ public class PlayerControllerV2 : MonoBehaviour
             // isWalking = false;
         }
 
+        // if (!(isStaired && movementInputDirection == 0))
+        // {
+
+
+
+        if (movementInputDirection != 0)
+        {
+            isWalking = true;
+
+        }
+        else
+        {
+            isWalking = false;
+            // coll.sharedMaterial.friction = 50f;
+        }
+
+
         anim.SetBool("isWalking", isWalking);
+       // }
+            
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
+        anim.SetBool("isResting", sleeping);
+        anim.SetBool("isDucking", ducking);
 
         // anim.SetBool("isWall", IsWallSliding);
     }
@@ -268,10 +323,26 @@ public class PlayerControllerV2 : MonoBehaviour
 
         movementInputDirection = Input.GetAxis("Horizontal");
 
+   
+     /*   
+        if( isStaired && movementInputDirection == 0)
+
+        {
+            coll.sharedMaterial.friction = 50f;
+            
+        }
+        else
+        {
+           coll.sharedMaterial.friction = 0;
+        }
+
+     */
+        
+
         //        Debug.Log(isGrounded);
         if (Input.GetButtonDown("Jump"))
         {
-            if (isGrounded)
+            if (isGrounded||isStaired)
             {
                 NormalJump();
             }
@@ -280,7 +351,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
         //TODO: Provide right button
 
-        if (Input.GetKeyDown(KeyCode.Z) && isGrounded && !hidden)
+        if (Input.GetKeyDown(KeyCode.Z) && (isGrounded || isStaired) && !hidden)
         {
 
 
@@ -320,17 +391,18 @@ public class PlayerControllerV2 : MonoBehaviour
     private void duck()
     {
         // TODO: use animation to transit to ducking sprite
-
+        ducking = true;
         // half height
-        playercollider.size *= new Vector2(1f, 0.5f);
+        // playercollider.size *= new Vector2(1f, 0.5f);
         // half speed
         movementSpeed *= 0.5f;
     }
 
     private void unduck()
     {
+        ducking = false;
         // double height
-        playercollider.size *= new Vector2(1f, 2f);
+        //playercollider.size *= new Vector2(1f, 2f);
         movementSpeed *= 2f;
 
     }
@@ -355,8 +427,31 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void ApplyMovement()
     {
+//         Debug.Log("Poops");
 
-        if (sleeping || hidden)
+
+
+
+        if (isStaired && movementInputDirection == 0 )
+        {
+            rb.position = freezePos;
+            rb.velocity = new Vector2(0, 0);
+
+
+            
+
+
+            Debug.Log("Poops");
+           // rb.bodyType = RigidbodyType2D.Kinematic;// = new Vector2(0, 0);
+            
+           return;
+        }
+        else
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+
+        if (sleeping || hidden || GameManager.Instance.IsGameOver)
         {
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -390,15 +485,8 @@ public class PlayerControllerV2 : MonoBehaviour
             //   {
             //       currentSpeed = minimumSpeed;
             //   }
+            
 
-            if (movementInputDirection != 0)
-            {
-                isWalking = true;
-            }
-            else
-            {
-                isWalking = false;
-            }
 
             rb.velocity = new Vector2(currentSpeed * movementInputDirection, rb.velocity.y);
 

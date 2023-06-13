@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1113934671493391594}
   - component: {fileID: 1113934671493391593}
   - component: {fileID: 1113934671493391595}
-  - component: {fileID: 1113934671493391592}
   - component: {fileID: 1113934671493391589}
   - component: {fileID: 1113934671493391588}
   - component: {fileID: 1113934671493391590}
@@ -95,14 +94,6 @@ MonoBehaviour:
   offset: {x: 0, y: 0.9, z: -10}
   smoothTime: 0.15
   target: {fileID: 0}
---- !u!81 &1113934671493391592
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113934671493391599}
-  m_Enabled: 1
 --- !u!114 &1113934671493391589
 MonoBehaviour:
   m_ObjectHideFlags: 0

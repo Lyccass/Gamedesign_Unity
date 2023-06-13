@@ -29,7 +29,7 @@ public class Door : MonoBehaviour
         {
             if (GameObject.Find("Lock" + lockID.ToString()) != null)
             {
-                Debug.Log("Lock" + lockID.ToString() + " exists");
+              //  Debug.Log("Lock" + lockID.ToString() + " exists");
                 // this lock still exists, so the door should be disabled
                 //gameObject.SetActive(false);
                 return;
