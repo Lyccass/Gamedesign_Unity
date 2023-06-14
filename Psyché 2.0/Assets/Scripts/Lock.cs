@@ -6,10 +6,14 @@ public class Lock : MonoBehaviour
 {
     public int lockID; // a unique ID for each lock
     private bool canInteract = false;
+    private bool contact;
 
 
     private void Update()
     {
+        if (contact && PlayerControllerV2.sleeping) canInteract = false;
+        if (contact && !PlayerControllerV2.sleeping && !canInteract) canInteract = true;
+
         if (canInteract && Input.GetKeyDown(KeyCode.F))
         {
             // check if the player has all three keys
@@ -55,6 +59,7 @@ public class Lock : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             canInteract = true;
+            contact = true;
             Debug.Log("Maybe open Lock");
         }
 
@@ -65,6 +70,7 @@ public class Lock : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             canInteract = false;
+            contact = false;
             Debug.Log("open Lock no more");
         }
     }
