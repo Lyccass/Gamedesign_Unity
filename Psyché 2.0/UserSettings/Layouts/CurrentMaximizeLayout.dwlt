@@ -451,9 +451,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 45.68905, y: -98.14801, z: 6.5220723}
+    m_Target: {x: 41.12607, y: -82.688385, z: 5.623227}
     speed: 2
-    m_Value: {x: 45.68905, y: -98.14801, z: 6.5220723}
+    m_Value: {x: 41.12607, y: -82.688385, z: 5.623227}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -504,9 +504,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 11.325707
+    m_Target: 41.696278
     speed: 2
-    m_Value: 11.325707
+    m_Value: 41.696278
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -590,7 +590,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -81842
+  m_LastSelectedObjectID: -100130
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 33107
+  controlID: 692
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -711,10 +711,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 850.6666}
-      m_SelectedIDs: de78feff
-      m_LastClickedID: -100130
-      m_ExpandedIDs: 4ac0feff4cc0feffa6e0feffaee0feff5038ffff8e5effff708effffbc8fffff7291ffffba91ffff9692ffffe492ffffd493ffffd893fffffa93ffff0094ffff769dffffc0b9ffff1ebaffff9cbeffffd0d9ffff74e1ffffcee1ffff3ef0ffff24f2fffffefaffff6088000074880000b6920000d49200005e980000ac980000989a0000e2c60000fec600002cc7000016c8000040c80000cec80000f0c80000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: d6a90000
+      m_LastClickedID: 43478
+      m_ExpandedIDs: ae17ffffc61fffff82e4ffffaee5ffff2ce6ffff50e7ffff36e8ffffe0e9ffff12eaffff3eebffff42ebffff64ebffff6aebffff3af3ffff6cf4ffffaef8ffffeaf8ffff4e6500007e7100009a710000ae710000c071000064720000be720000ee720000687300009c73000048740000c4a90000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -806,13 +806,13 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 47
   m_LastFolders:
-  - Assets
+  - Assets/Scenes
   m_LastFoldersGridSize: 47
   m_LastProjectPath: "C:\\Users\\lukas\\OneDrive\\Desktop\\Mediadesign\\Game Design\\Games\\Game\\Psych\xE9
     2.0"
@@ -820,9 +820,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 846b0000
-    m_LastClickedID: 27524
-    m_ExpandedIDs: 00000000846b0000866b0000886b00008c6b00008e6b0000aa6b000000ca9a3b
+    m_SelectedIDs: c26b0000
+    m_LastClickedID: 27586
+    m_ExpandedIDs: 00000000aa6b0000ac6b0000ae6b0000b06b0000b26b0000b46b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -850,7 +850,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000846b0000866b0000886b00008c6b00008e6b0000aa6b000000ca9a3b
+    m_ExpandedIDs: 00000000aa6b0000ac6b0000ae6b0000b06b0000b26b0000b46b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -875,10 +875,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: de78feff
-    m_LastClickedInstanceID: -100130
+    m_SelectedInstanceIDs: d6a90000
+    m_LastClickedInstanceID: 43478
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: caa9000008600000866100002c84000094670000267a0000bc600000c49e0000fa610000cc6500007895000080950000526d0000ce69000072b601007667000098760000c89400008c6e0000fa660000767900009e750000cc74000000000000
+    m_ExpandedInstanceIDs: caa9000008600000866100002c84000094670000267a0000bc600000c49e0000fa610000cc6500007895000080950000526d0000ce69000072b601007667000098760000c89400008c6e0000fa660000767900009e750000cc7400000000000032670000c06c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
