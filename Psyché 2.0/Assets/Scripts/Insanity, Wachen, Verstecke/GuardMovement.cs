@@ -21,31 +21,49 @@ public class GuardMovement : MonoBehaviour
 
     private float leftBorder;
     private float rightBorder;
+    private float timer;
+    private bool isWaiting = false;
     private bool isTouchingWall = false;
     private Vector2 direction = Vector2.left;
 
     private BoxCollider2D guardcollider;
+    public GameObject body;
+    private Animator guardAni;
     //  public GameObject guard;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        guardAni = body.GetComponent<Animator>();
         initialPosition = gameObject.transform.position;
         position = initialPosition;
         leftBorder = initialPosition.x - walkRange;
         rightBorder = initialPosition.x + walkRange;
         guardcollider = GetComponent<BoxCollider2D>();
+        timer = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateAnis();
+       
+        if (timer >= 0)
+        {
+            // if wait timer, reduce it and do not move.
+            timer -= Time.deltaTime;
+                return;
+        }
+
+        isWaiting = false;
+
         checkWalls();
 
         // Turn on touching wall
         if (isTouchingWall)
         {
+            doWaiting();
             Debug.Log("Guard turned at wall!");
             moveLeft = !moveLeft;
             moveRight = !moveRight;
@@ -64,7 +82,7 @@ public class GuardMovement : MonoBehaviour
 
         if (position.x < leftBorder)
         {
-
+            doWaiting();
             moveRight = true;
             moveLeft = false;
             direction = Vector2.right;
@@ -75,6 +93,7 @@ public class GuardMovement : MonoBehaviour
 
         if(position.x > rightBorder)
         {
+            doWaiting();
             moveLeft = true;
             moveRight = false;
             direction = Vector2.left;
@@ -98,8 +117,13 @@ public class GuardMovement : MonoBehaviour
         }
 
         gameObject.transform.position = position;
-    }
 
+
+    }
+    void updateAnis()
+    {
+        guardAni.SetBool("isWaiting", isWaiting);
+    }
 
     private void checkWalls()
     {
@@ -109,5 +133,10 @@ public class GuardMovement : MonoBehaviour
 
      }
 
-
+    void doWaiting()
+    {
+        // Set timer
+        timer = 2f;
+        isWaiting = true;
+    }
 }
