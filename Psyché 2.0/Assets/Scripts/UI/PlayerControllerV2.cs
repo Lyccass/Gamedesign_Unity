@@ -361,7 +361,7 @@ public class PlayerControllerV2 : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+      /*  if (Input.GetKeyDown(KeyCode.S))
         {
             duck();
         }
@@ -369,7 +369,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             unduck();
         }
-
+      */
     }
 
 
