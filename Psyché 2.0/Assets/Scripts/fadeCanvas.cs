@@ -29,7 +29,7 @@ public class fadeCanvas : MonoBehaviour
     void Update()
     {
 
-        Debug.Log("fade alpha:" + alpha);
+     //   Debug.Log("fade alpha:" + alpha);
         Color col = fader.color;
 
         if (GameManager.Instance.isFading)

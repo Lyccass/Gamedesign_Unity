@@ -219,7 +219,7 @@ public class PlayerControllerV2 : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         isTouchingWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, whatIsGround);
     
-        Debug.Log("Stasired: " + isStaired);
+      //  Debug.Log("Stasired: " + isStaired);
 
 
 
@@ -297,13 +297,15 @@ public class PlayerControllerV2 : MonoBehaviour
 
 
         anim.SetBool("isWalking", isWalking);
-       // }
+        // }
+
+        Debug.Log("Hidin " + hidden);
             
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("yVelo", rb.velocity.y);
         anim.SetBool("isResting", sleeping);
         anim.SetBool("isDucking", ducking);
-
+        anim.SetBool("isHiding", hidden);
         // anim.SetBool("isWall", IsWallSliding);
     }
 
@@ -371,7 +373,7 @@ public class PlayerControllerV2 : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+      /*  if (Input.GetKeyDown(KeyCode.S))
         {
             duck();
         }
@@ -379,7 +381,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             unduck();
         }
-
+      */
     }
 
 
