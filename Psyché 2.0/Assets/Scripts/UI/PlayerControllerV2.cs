@@ -35,7 +35,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public GameObject sleepScreen;
     // TODO: immer bei sign auch f anzeigen!
-    public GameObject sign;
+  //  public GameObject sign;
     public GameObject f;
     public GameObject z;
     public GameObject warn;
@@ -571,24 +571,29 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
         else
-            sign.SetActive(value);
-        f.SetActive(value);
+          //  sign.SetActive(value);
+     if(value && f.activeSelf)
+        {
+            // no spamming of f active
+            return;
+        }
+            f.SetActive(value);
     }
     private void setSignZ(bool value)
     {
         if (warning) return;
-        sign.SetActive(value);
+       // sign.SetActive(value);
         z.SetActive(value);
     }
     private void setSignWarn(bool value)
     {
 
         warn.SetActive(value);
-        sign.SetActive(value);
+        //sign.SetActive(value);
 
         if (f.activeSelf || z.activeSelf)
         {
-             sign.SetActive(true);
+          //   sign.SetActive(true);
         }
        
 
