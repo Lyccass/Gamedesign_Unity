@@ -41,7 +41,7 @@ public class GuardMovement : MonoBehaviour
         leftBorder = initialPosition.x - walkRange;
         rightBorder = initialPosition.x + walkRange;
         guardcollider = GetComponent<BoxCollider2D>();
-        timer = 5;
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class GuardMovement : MonoBehaviour
     {
         updateAnis();
        
-        if (timer >= 0)
+        if (timer > 0)
         {
             // if wait timer, reduce it and do not move.
             timer -= Time.deltaTime;
