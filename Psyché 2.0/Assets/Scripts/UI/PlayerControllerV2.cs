@@ -189,7 +189,7 @@ public class PlayerControllerV2 : MonoBehaviour
         if (warning)
         {
             z.SetActive(false);
-            f.SetActive(false);
+           // f.SetActive(false);
             setSignWarn(true);
         }
         else
@@ -546,7 +546,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private void setSignF(bool value)
     {
-        if (warning) return;
+      //  if (warning) return;
 
         if (z.activeSelf || sleeping)
         {

@@ -8,7 +8,7 @@ public class SignPart : MonoBehaviour
     ParticleSystem p;
     private void OnEnable()
     {
-        if (p == null)
+        if (p != null)
         {
           p.Play();
         }
