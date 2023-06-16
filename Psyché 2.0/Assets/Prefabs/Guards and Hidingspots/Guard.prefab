@@ -614,7 +614,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 1296102461
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!1 &8211403831804156219
 GameObject:
   m_ObjectHideFlags: 0
