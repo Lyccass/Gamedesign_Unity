@@ -11,8 +11,10 @@ public class Door : MonoBehaviour
         // disable the door if any connected locks are still in the scene
         foreach (int lockID in connectedLockIDs)
         {
+            // Searches all locks in the scene by name
             if (GameObject.Find("Lock" + lockID.ToString()) != null)
             {
+                
                // gameObject.SetActive(false);
                 return;
             }
