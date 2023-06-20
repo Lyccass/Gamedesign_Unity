@@ -35,7 +35,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public GameObject sleepScreen;
     // TODO: immer bei sign auch f anzeigen!
-    public GameObject sign;
+  //  public GameObject sign;
     public GameObject f;
     public GameObject z;
     public GameObject warn;
@@ -189,7 +189,7 @@ public class PlayerControllerV2 : MonoBehaviour
         if (warning)
         {
             z.SetActive(false);
-            f.SetActive(false);
+           // f.SetActive(false);
             setSignWarn(true);
         }
         else
@@ -223,15 +223,6 @@ public class PlayerControllerV2 : MonoBehaviour
 
 
 
-        if (isStaired)
-        {
-            // Tats�chlich kommt hier colider!
-       //   currentStair = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsStair).gameObject;
-          //  Debug.Log(currentStair.name);
-            // currentStair.transform.parent.gameObject.c
-
-
-        }
 
         // TODO: if rb .velocity = down (und not grounded), staircollider = true;
         // -> wenn normal laufen, passiert nix
@@ -279,8 +270,6 @@ public class PlayerControllerV2 : MonoBehaviour
             // isWalking = false;
         }
 
-        // if (!(isStaired && movementInputDirection == 0))
-        // {
 
 
 
@@ -302,6 +291,7 @@ public class PlayerControllerV2 : MonoBehaviour
         Debug.Log("Hidin " + hidden);
             
         anim.SetBool("isGrounded", isGrounded);
+        // Für jumping
         anim.SetFloat("yVelo", rb.velocity.y);
         anim.SetBool("isResting", sleeping);
         anim.SetBool("isDucking", ducking);
@@ -326,20 +316,7 @@ public class PlayerControllerV2 : MonoBehaviour
         movementInputDirection = Input.GetAxis("Horizontal");
 
    
-     /*   
-        if( isStaired && movementInputDirection == 0)
-
-        {
-            coll.sharedMaterial.friction = 50f;
-            
-        }
-        else
-        {
-           coll.sharedMaterial.friction = 0;
-        }
-
-     */
-        
+       
 
         //        Debug.Log(isGrounded);
         if (Input.GetButtonDown("Jump"))
@@ -414,6 +391,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             return;
         }
+      //  isJumping = true;
         // Adjust jump force to insanity
         float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 400));
 
@@ -433,12 +411,18 @@ public class PlayerControllerV2 : MonoBehaviour
 
 
 
-
-        if (isStaired && movementInputDirection == 0 )
+        // momento: wenn grad im sprung, lass mal die y-velocity! 
+        // wenn y nach oben (sprung), skip den shit!
+        // wenn landen ist aber blös!
+        if (isStaired && movementInputDirection == 0 && rb.velocity.y <=0 )
         {
-            rb.position = freezePos;
-            rb.velocity = new Vector2(0, 0);
+                 rb.position = freezePos;
+                 rb.velocity = new Vector2(0,0);
 
+            // ?!? evtl passt springen dann so
+           
+            
+            // wenn jumping, d.h. wenn y-velo > 0
 
             
 
@@ -562,7 +546,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     private void setSignF(bool value)
     {
-        if (warning) return;
+      //  if (warning) return;
 
         if (z.activeSelf || sleeping)
         {
@@ -571,24 +555,29 @@ public class PlayerControllerV2 : MonoBehaviour
             return;
         }
         else
-            sign.SetActive(value);
-        f.SetActive(value);
+          //  sign.SetActive(value);
+     if(value && f.activeSelf)
+        {
+            // no spamming of f active
+            return;
+        }
+            f.SetActive(value);
     }
     private void setSignZ(bool value)
     {
         if (warning) return;
-        sign.SetActive(value);
+       // sign.SetActive(value);
         z.SetActive(value);
     }
     private void setSignWarn(bool value)
     {
 
         warn.SetActive(value);
-        sign.SetActive(value);
+        //sign.SetActive(value);
 
         if (f.activeSelf || z.activeSelf)
         {
-             sign.SetActive(true);
+          //   sign.SetActive(true);
         }
        
 

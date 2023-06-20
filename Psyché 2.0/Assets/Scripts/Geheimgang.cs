@@ -9,6 +9,7 @@ public class Geheimgang : MonoBehaviour
     private bool handle = false;
     public GameObject secretDoor;
     public GameObject ClosedDoorColider;
+    public GameObject Fackel;
     public AudioSource door;
     // Start is called before the first frame update
 
@@ -23,6 +24,7 @@ public class Geheimgang : MonoBehaviour
             canInteract = false;
             secretDoor.SetActive(true);
             ClosedDoorColider.SetActive(false);
+            Fackel.transform.Rotate(new Vector3(0,0,180));
         }
 
         if (canInteract && Input.GetKeyDown(KeyCode.F) && handle == true)
@@ -32,6 +34,7 @@ public class Geheimgang : MonoBehaviour
             canInteract = true;
             secretDoor.SetActive(false);
             ClosedDoorColider.SetActive(true);
+            Fackel.transform.Rotate(new Vector3(0, 0, 180));
         }
 
 
