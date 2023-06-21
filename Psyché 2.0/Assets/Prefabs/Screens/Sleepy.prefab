@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 5623539145432967741}
   - component: {fileID: 5623539145432967731}
   - component: {fileID: 5623539145432967730}
+  - component: {fileID: 39241132953453220}
   - component: {fileID: 1007144179}
   m_Layer: 5
   m_Name: Sleep
@@ -418,6 +419,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &39241132953453220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5623539145432967740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73510658ab0c2294aa78672edb9d61f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asour: {fileID: 1007144179}
 --- !u!82 &1007144179
 AudioSource:
   m_ObjectHideFlags: 0

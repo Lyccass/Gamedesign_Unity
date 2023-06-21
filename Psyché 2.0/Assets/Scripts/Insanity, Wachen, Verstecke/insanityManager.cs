@@ -9,8 +9,9 @@ public class insanityManager : MonoBehaviour
     private static float timer = 0f;
 
     public static float Insanity { get => insanity; }
+    
 
-   
+
     // Start is called before the first frame update
     void Start()
     {
