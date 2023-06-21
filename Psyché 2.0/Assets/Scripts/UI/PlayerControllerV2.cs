@@ -48,8 +48,9 @@ public class PlayerControllerV2 : MonoBehaviour
 
     //
     public static bool sleeping;
+    // set in guard?
     public static bool warning;
-    
+    public static bool innerWarning;
 
     private bool ducking = false;
 
@@ -83,6 +84,8 @@ public class PlayerControllerV2 : MonoBehaviour
     private float timer = 0f;
     private Vector2 freezePos = new Vector2(-1,-1);
 
+    private float heartbeatStandardDelay =  1f;
+    private float heartbeatTimer = 0f;
 
 
     public Vector2 wallHopDirection;
@@ -93,6 +96,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public Transform stairCheck;
     public LayerMask whatIsGround;
     public LayerMask whatIsStair;
+    public AudioSource heartbeat;
 
     private GameObject currentStair = null;
 
@@ -106,6 +110,7 @@ public class PlayerControllerV2 : MonoBehaviour
         playercollider = GetComponent<BoxCollider2D>();
         warning = false;
         coll = GetComponent<BoxCollider2D>();
+       // heartbeat = GetComponent<AudioSource>();
         //  amountOfJumpsLeft = amountOfJumps;
         //  wallHopDirection.Normalize();
         //   wallJumpDirection.Normalize();
@@ -186,7 +191,7 @@ public class PlayerControllerV2 : MonoBehaviour
             
         }
 
-        if (warning)
+        if (warning || innerWarning)
         {
             z.SetActive(false);
            // f.SetActive(false);
@@ -200,6 +205,7 @@ public class PlayerControllerV2 : MonoBehaviour
             setSignWarn(false);
         }
         ApplyMovement();
+        playHeartbeat();
         freezePos = rb.position;
     }
 
@@ -496,6 +502,28 @@ public class PlayerControllerV2 : MonoBehaviour
 
     }
 
+    private void playHeartbeat()
+    {
+
+
+        heartbeatTimer -= Time.deltaTime;
+   
+        if (heartbeatTimer <= 0)
+        {
+            if (GameManager.Instance.Insanity > 20)
+            {
+                heartbeat.Play();
+
+            }
+
+            // reduce by multiplier, e.g. delay/2 at 100 insanity
+            float multiplier = 1 + 0.7f*(GameManager.Instance.Insanity / 100) ;
+            float currentheartbeatDelay = heartbeatStandardDelay / multiplier;
+           // Debug.Log("Beattimer " + currentheartbeatDelay + "multiplier " + multiplier );
+            heartbeatTimer = currentheartbeatDelay;
+            
+        }
+    }
 
     // 
     private void setBackToCheckpoint()
