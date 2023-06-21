@@ -20,15 +20,26 @@ public class OuterCircle : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("OOUTER TRIGGEr");
-            PlayerControllerV2.warning = true;
+            //   Debug.Log("OOUTER TRIGGEr");
+            if (!PlayerControllerV2.hidden)
+            {
+                PlayerControllerV2.warning = true;
+            }
+            else
+            {
+                PlayerControllerV2.warning = false;
+            }
+            
+            // if hidden aber trtz warning, lass so! weil das wurde dann von detect gesetzt!
+            // sonst if hidden false
+
         }
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("OOUTER TRIGGEr off");
+           // Debug.Log("OOUTER TRIGGEr off");
             PlayerControllerV2.warning = false;
         }
     }
