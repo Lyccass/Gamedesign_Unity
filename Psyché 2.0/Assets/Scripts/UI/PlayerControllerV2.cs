@@ -288,7 +288,7 @@ public class PlayerControllerV2 : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         // }
 
-        Debug.Log("Hidin " + hidden);
+        
             
         anim.SetBool("isGrounded", isGrounded);
         // Für jumping
@@ -323,6 +323,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             if (isGrounded||isStaired)
             {
+                GameManager.Instance.Insanity = GameManager.Instance.Insanity + 10;
                 NormalJump();
             }
 
