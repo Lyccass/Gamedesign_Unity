@@ -62,10 +62,10 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public float movementSpeed = 8f;
     public float minimumSpeed = 4f;
-    public float insanityMovementThreshold = 50f;
+    public float insanityMovementThreshold = 20f;
 
     public float jumpforce = 16.0f;
-    public float minimumJumpforce = 10f;
+    public float minimumJumpforce = 4f;
 
 
     public float groundCheckRadius;
@@ -126,8 +126,8 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if (!sleeping)
             {
-                GameManager.Instance.addInsanity(0.2f);
-                if (GameManager.Instance.Insanity > 50)
+                GameManager.Instance.addInsanity(0.1f);
+                if (GameManager.Instance.Insanity > 65)
                 {
                     setSignZ(true);
                     setSignF(false);
@@ -137,7 +137,7 @@ public class PlayerControllerV2 : MonoBehaviour
             {
 
                 setSignZ(false);
-                GameManager.Instance.decrementInsanity(1f);
+                GameManager.Instance.decrementInsanity(1.2f);
             }
 
             timer = 0;
@@ -323,7 +323,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             if (isGrounded||isStaired)
             {
-                GameManager.Instance.Insanity = GameManager.Instance.Insanity + 10;
+                
                 NormalJump();
             }
 
@@ -394,11 +394,11 @@ public class PlayerControllerV2 : MonoBehaviour
         }
       //  isJumping = true;
         // Adjust jump force to insanity
-        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 400));
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 200));
 
         if (currentJumpforce < minimumJumpforce)
         {
-            currentJumpforce = 0;
+            currentJumpforce = 4;
         }
         rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
         //amountOfJumpsLeft--;
@@ -457,10 +457,13 @@ public class PlayerControllerV2 : MonoBehaviour
             if (insanityOverflow > 0)
             {
                 multiplier = 1 - (insanityOverflow / (100f - insanityMovementThreshold));
-                if (multiplier < 0)
+              
+                
+                if (multiplier < 0.3f)
                 {
-                    multiplier = 0;
+                    multiplier = 0.3f;
                 }
+
             }
 
             float currentSpeed = movementSpeed * multiplier;
