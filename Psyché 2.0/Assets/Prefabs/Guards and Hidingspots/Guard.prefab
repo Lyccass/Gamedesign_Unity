@@ -417,10 +417,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 168
-  DopplerLevel: 0
+  Priority: 256
+  DopplerLevel: 0.38
   MinDistance: 1
-  MaxDistance: 12.020401
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -470,7 +470,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.16944444
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d00583c4201020438245e720395cd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkRange: 16
+  walkRange: 12
   ground:
     serializedVersion: 2
     m_Bits: 64
@@ -559,7 +559,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8211403831367994628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -612,8 +612,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8211403831367994628}
   m_Enabled: 1
-  m_SortingLayerID: 1296102461
-  m_SortingLayer: 3
+  m_SortingLayerID: -25387183
+  m_SortingLayer: 4
   m_SortingOrder: 1
 --- !u!1 &8211403831804156219
 GameObject:
@@ -719,7 +719,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3eb623898a37a704e8383bfb50b4023d, type: 3}
-  m_Color: {r: 1, g: 0.8059179, b: 0.015686274, a: 0.8352941}
+  m_Color: {r: 0.9056604, g: 0.81128585, b: 0.4243503, a: 0.5294118}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
