@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 933206426367912595}
   - component: {fileID: 8334968172786457840}
   m_Layer: 0
-  m_Name: Wandteppich Hideout
+  m_Name: Truhe gold rot
   m_TagString: triggerSign
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4728824577933869420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.3269, y: -86.1781, z: 0}
-  m_LocalScale: {x: 0.33392242, y: 0.33392242, z: 0.33392242}
+  m_LocalPosition: {x: 18.05, y: -87.9, z: 0}
+  m_LocalScale: {x: 0.3501668, y: 0.3501668, z: 0.3501668}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1296102461
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 80c7fb82175fe2a45a79eb17d39d18ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc7be0e0997160b49b232e59d568b7fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,18 +99,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.046922684, y: -0.00985384}
+  m_Offset: {x: 0.091958046, y: -0.095710516}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 9.393652, y: 22.369999}
+    oldSize: {x: 10.75, y: 7.36}
     newSize: {x: 6.29, y: 10.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.014879, y: 21.19548}
+  m_Size: {x: 9.328186, y: 6.293921}
   m_EdgeRadius: 0
 --- !u!114 &8334968172786457840
 MonoBehaviour:
