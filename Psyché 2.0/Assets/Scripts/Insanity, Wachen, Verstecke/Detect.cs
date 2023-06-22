@@ -9,7 +9,9 @@ public class Detect : MonoBehaviour
    // bool hidden = false;
 
 
-
+    // !!! wenn: 
+    // im outer
+    // im inner und hidden
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,11 +25,11 @@ public class Detect : MonoBehaviour
             {
                 GameManager.Instance.gameOver();
             }
-
-
+            else
+            {
+                PlayerControllerV2.innerWarning = true;
+            }
         }
-
-
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
@@ -42,5 +44,10 @@ public class Detect : MonoBehaviour
 
         }
 
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        PlayerControllerV2.innerWarning = false;
     }
 }

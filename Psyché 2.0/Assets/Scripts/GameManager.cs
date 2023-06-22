@@ -10,6 +10,7 @@ public class GameManager
     public bool restart = false;
     public bool cheats = false;
     public bool isFading = false;
+    
     public static GameManager Instance
     {
 
@@ -21,10 +22,11 @@ public class GameManager
 
     }
 
-    public float Insanity = 0f;
+   public float Insanity = 0f;
    public bool IsGameOver = false;
-
    
+
+
 
     public void gameOver()
     {

@@ -48,8 +48,9 @@ public class PlayerControllerV2 : MonoBehaviour
 
     //
     public static bool sleeping;
+    // set in guard?
     public static bool warning;
-    
+    public static bool innerWarning;
 
     private bool ducking = false;
 
@@ -62,10 +63,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public float movementSpeed = 8f;
     public float minimumSpeed = 4f;
-    public float insanityMovementThreshold = 50f;
+    public float insanityMovementThreshold = 20f;
 
     public float jumpforce = 16.0f;
-    public float minimumJumpforce = 10f;
+    public float minimumJumpforce = 4f;
+    private bool stairJump = false;
 
 
     public float groundCheckRadius;
@@ -83,6 +85,8 @@ public class PlayerControllerV2 : MonoBehaviour
     private float timer = 0f;
     private Vector2 freezePos = new Vector2(-1,-1);
 
+    private float heartbeatStandardDelay =  1f;
+    private float heartbeatTimer = 0f;
 
 
     public Vector2 wallHopDirection;
@@ -93,6 +97,7 @@ public class PlayerControllerV2 : MonoBehaviour
     public Transform stairCheck;
     public LayerMask whatIsGround;
     public LayerMask whatIsStair;
+    public AudioSource heartbeat;
 
     private GameObject currentStair = null;
 
@@ -106,6 +111,7 @@ public class PlayerControllerV2 : MonoBehaviour
         playercollider = GetComponent<BoxCollider2D>();
         warning = false;
         coll = GetComponent<BoxCollider2D>();
+       // heartbeat = GetComponent<AudioSource>();
         //  amountOfJumpsLeft = amountOfJumps;
         //  wallHopDirection.Normalize();
         //   wallJumpDirection.Normalize();
@@ -126,8 +132,8 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if (!sleeping)
             {
-                GameManager.Instance.addInsanity(0.2f);
-                if (GameManager.Instance.Insanity > 50)
+                GameManager.Instance.addInsanity(0.1f);
+                if (GameManager.Instance.Insanity > 65)
                 {
                     setSignZ(true);
                     setSignF(false);
@@ -137,7 +143,7 @@ public class PlayerControllerV2 : MonoBehaviour
             {
 
                 setSignZ(false);
-                GameManager.Instance.decrementInsanity(1f);
+                GameManager.Instance.decrementInsanity(1.2f);
             }
 
             timer = 0;
@@ -186,7 +192,7 @@ public class PlayerControllerV2 : MonoBehaviour
             
         }
 
-        if (warning)
+        if (warning || innerWarning)
         {
             z.SetActive(false);
            // f.SetActive(false);
@@ -200,6 +206,7 @@ public class PlayerControllerV2 : MonoBehaviour
             setSignWarn(false);
         }
         ApplyMovement();
+        playHeartbeat();
         freezePos = rb.position;
     }
 
@@ -288,7 +295,7 @@ public class PlayerControllerV2 : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
         // }
 
-        Debug.Log("Hidin " + hidden);
+        
             
         anim.SetBool("isGrounded", isGrounded);
         // Für jumping
@@ -323,6 +330,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             if (isGrounded||isStaired)
             {
+                
                 NormalJump();
             }
 
@@ -391,13 +399,14 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             return;
         }
+        stairJump = true;
       //  isJumping = true;
         // Adjust jump force to insanity
-        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 400));
+        float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 200));
 
         if (currentJumpforce < minimumJumpforce)
         {
-            currentJumpforce = 0;
+            currentJumpforce = 4;
         }
         rb.velocity = new Vector2(rb.velocity.x, currentJumpforce);
         //amountOfJumpsLeft--;
@@ -407,16 +416,24 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void ApplyMovement()
     {
-//         Debug.Log("Poops");
+        //         Debug.Log("Poops");
 
 
 
         // momento: wenn grad im sprung, lass mal die y-velocity! 
         // wenn y nach oben (sprung), skip den shit!
         // wenn landen ist aber blös!
-        if (isStaired && movementInputDirection == 0 && rb.velocity.y <=0 )
+
+        List<ContactPoint2D> cps = new List<ContactPoint2D>();
+        
+        // is staired and no move and really staired (no jump or land) and not stairjumping(begun) and not jumping up atm
+
+        if (isStaired && movementInputDirection == 0 && coll.GetContacts(cps) >0 && !stairJump && rb.velocity.y <= 0)
         {
-                 rb.position = freezePos;
+
+           
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            /*  rb.position = freezePos;  
                  rb.velocity = new Vector2(0,0);
 
             // ?!? evtl passt springen dann so
@@ -429,14 +446,19 @@ public class PlayerControllerV2 : MonoBehaviour
 
             Debug.Log("Poops");
            // rb.bodyType = RigidbodyType2D.Kinematic;// = new Vector2(0, 0);
-            
+            */
            return;
         }
         else
         {
+            // Stairjump set true only once when jumping on stair
+            stairJump = false;
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
-
+        
         if (sleeping || hidden || GameManager.Instance.IsGameOver)
         {
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
@@ -456,10 +478,13 @@ public class PlayerControllerV2 : MonoBehaviour
             if (insanityOverflow > 0)
             {
                 multiplier = 1 - (insanityOverflow / (100f - insanityMovementThreshold));
-                if (multiplier < 0)
+              
+                
+                if (multiplier < 0.3f)
                 {
-                    multiplier = 0;
+                    multiplier = 0.3f;
                 }
+
             }
 
             float currentSpeed = movementSpeed * multiplier;
@@ -495,6 +520,28 @@ public class PlayerControllerV2 : MonoBehaviour
 
     }
 
+    private void playHeartbeat()
+    {
+
+
+        heartbeatTimer -= Time.deltaTime;
+   
+        if (heartbeatTimer <= 0)
+        {
+            if (GameManager.Instance.Insanity > 20)
+            {
+                heartbeat.Play();
+
+            }
+
+            // reduce by multiplier, e.g. delay/2 at 100 insanity
+            float multiplier = 1 + 0.7f*(GameManager.Instance.Insanity / 100) ;
+            float currentheartbeatDelay = heartbeatStandardDelay / multiplier;
+           // Debug.Log("Beattimer " + currentheartbeatDelay + "multiplier " + multiplier );
+            heartbeatTimer = currentheartbeatDelay;
+            
+        }
+    }
 
     // 
     private void setBackToCheckpoint()
