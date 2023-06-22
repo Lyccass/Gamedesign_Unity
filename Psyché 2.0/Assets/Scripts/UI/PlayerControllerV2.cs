@@ -67,6 +67,7 @@ public class PlayerControllerV2 : MonoBehaviour
 
     public float jumpforce = 16.0f;
     public float minimumJumpforce = 4f;
+    private bool stairJump = false;
 
 
     public float groundCheckRadius;
@@ -398,6 +399,7 @@ public class PlayerControllerV2 : MonoBehaviour
         {
             return;
         }
+        stairJump = true;
       //  isJumping = true;
         // Adjust jump force to insanity
         float currentJumpforce = jumpforce * (1 - (GameManager.Instance.Insanity / 200));
@@ -414,16 +416,24 @@ public class PlayerControllerV2 : MonoBehaviour
     }
     private void ApplyMovement()
     {
-//         Debug.Log("Poops");
+        //         Debug.Log("Poops");
 
 
 
         // momento: wenn grad im sprung, lass mal die y-velocity! 
         // wenn y nach oben (sprung), skip den shit!
         // wenn landen ist aber blös!
-        if (isStaired && movementInputDirection == 0 && rb.velocity.y <=0 )
+
+        List<ContactPoint2D> cps = new List<ContactPoint2D>();
+        
+        // is staired and no move and really staired (no jump or land) and not stairjumping(begun) and not jumping up atm
+
+        if (isStaired && movementInputDirection == 0 && coll.GetContacts(cps) >0 && !stairJump && rb.velocity.y <= 0)
         {
-                 rb.position = freezePos;
+
+           
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            /*  rb.position = freezePos;  
                  rb.velocity = new Vector2(0,0);
 
             // ?!? evtl passt springen dann so
@@ -436,14 +446,19 @@ public class PlayerControllerV2 : MonoBehaviour
 
             Debug.Log("Poops");
            // rb.bodyType = RigidbodyType2D.Kinematic;// = new Vector2(0, 0);
-            
+            */
            return;
         }
         else
         {
+            // Stairjump set true only once when jumping on stair
+            stairJump = false;
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
-
+        
         if (sleeping || hidden || GameManager.Instance.IsGameOver)
         {
             // If sleeping / hiding, stop moving by setting current x-velocity to 0
