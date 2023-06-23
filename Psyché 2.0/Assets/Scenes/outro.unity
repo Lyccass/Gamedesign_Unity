@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'There, before him, sat the king upon a wooden
 
-    throne, while the
-    gallows loomed ominously nearby'
+    throne, while the gallows
+    loomed ominously nearby'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c5e2e0dbcd00f7419057a5639c7bb68, type: 2}
   m_sharedMaterial: {fileID: -1678283780727554067, guid: 5c5e2e0dbcd00f7419057a5639c7bb68, type: 2}
@@ -2223,7 +2223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1840293487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2266,8 +2266,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Now, as he finally felt the warmth of
 
-    sunlight against his skin
-    and heard the symphony of sounds around him,'
+    sunlight against his skin and
+    heard the symphony of sounds around him,'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c5e2e0dbcd00f7419057a5639c7bb68, type: 2}
   m_sharedMaterial: {fileID: -1678283780727554067, guid: 5c5e2e0dbcd00f7419057a5639c7bb68, type: 2}
