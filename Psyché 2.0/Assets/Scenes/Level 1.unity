@@ -3725,24 +3725,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1235601947002429685, guid: 25da558d14ddc9b47883f0bbeb4a71a7, type: 3}
   m_PrefabInstance: {fileID: 650882146}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &521605903 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 519874317508342751, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-  m_PrefabInstance: {fileID: 519874316091321854}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &521605909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521605903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43fc6a01e8009364fbdc23e2518dbf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: Main
 --- !u!1001 &528786876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4587,12 +4569,16 @@ PrefabInstance:
       value: Basic wall (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4808580021704998954, guid: d286a5017c8d4ff47bd4c8eacf1331b6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.676338
+      objectReference: {fileID: 0}
+    - target: {fileID: 4808580021704998954, guid: d286a5017c8d4ff47bd4c8eacf1331b6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.92
+      value: 4.1659
       objectReference: {fileID: 0}
     - target: {fileID: 4808580021704998954, guid: d286a5017c8d4ff47bd4c8eacf1331b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 6890614377030501524, guid: d286a5017c8d4ff47bd4c8eacf1331b6, type: 3}
       propertyPath: m_RootOrder
@@ -14163,17 +14149,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c5ed5c8cd2897945ab6e79a8e707bc4, type: 3}
---- !u!114 &1864739944 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 519874316231355387, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-  m_PrefabInstance: {fileID: 519874316091321854}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1872619844
 GameObject:
   m_ObjectHideFlags: 0
@@ -14711,6 +14686,10 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 75.9226
       objectReference: {fileID: 0}
+    - target: {fileID: 268918530961469748, guid: 87e130c5b31c1984c9dd3e4a046df9f8, type: 3}
+      propertyPath: m_Size.y
+      value: 4.845039
+      objectReference: {fileID: 0}
     - target: {fileID: 268918530961469749, guid: 87e130c5b31c1984c9dd3e4a046df9f8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -14721,7 +14700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 268918530961469749, guid: 87e130c5b31c1984c9dd3e4a046df9f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.800003
+      value: 11.7431
       objectReference: {fileID: 0}
     - target: {fileID: 268918530961469749, guid: 87e130c5b31c1984c9dd3e4a046df9f8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16168,7 +16147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118871968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.2, y: 4.12, z: 0.72686994}
+  m_LocalPosition: {x: 10.7, y: 15.7, z: 0.72686994}
   m_LocalScale: {x: 209.30359, y: 84.67621, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16407,22 +16386,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 226100060}
     m_Modifications:
-    - target: {fileID: 519874316231355382, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-      propertyPath: button
-      value: 
-      objectReference: {fileID: 1864739944}
-    - target: {fileID: 519874317508342746, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 521605909}
-    - target: {fileID: 519874317508342746, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 519874317508342746, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LoadSceneButton, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 4424961255246033683, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -16511,16 +16474,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Death
       objectReference: {fileID: 0}
-    - target: {fileID: 4424961255246033686, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4424961255408549038, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 519874317508342749, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6121ed1e34c9b824b8014f3659de3102, type: 3}
 --- !u!1001 &659117543201841889
 PrefabInstance:
@@ -16962,12 +16916,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2160854995192545238, guid: 4a634dcac7223494fa9095c0069ef015, type: 3}
       propertyPath: lines.Array.data[0]
-      value: The path is divided. It is your choice if you  want to go the path ahead
-        or above.
+      value: The path is divided. It is your choice iwhich path you want to follow,
+        you can either use the stairs or go straight ahead.
       objectReference: {fileID: 0}
     - target: {fileID: 2160854995192545238, guid: 4a634dcac7223494fa9095c0069ef015, type: 3}
       propertyPath: lines.Array.data[1]
-      value: You can jump on Stairs to enter them and walk up. if you dont want to
+      value: You can jump on stairs to enter them and walk up. if you dont want to
         go up just press the down button to fall through the stairs or bridges
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -17682,6 +17636,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 293887483}
     m_Modifications:
+    - target: {fileID: 1103238980835779817, guid: e768d93549de03d4a84fbe6b54138933, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 24.443016
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103238980835779817, guid: e768d93549de03d4a84fbe6b54138933, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.282
+      objectReference: {fileID: 0}
     - target: {fileID: 2458648393699319785, guid: e768d93549de03d4a84fbe6b54138933, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -18959,6 +18921,23 @@ PrefabInstance:
     - target: {fileID: 7568170670852550766, guid: c233633acd304a6449115674001fd80a, type: 3}
       propertyPath: m_Name
       value: IntroKeys
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568170672202966236, guid: c233633acd304a6449115674001fd80a, type: 3}
+      propertyPath: lines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568170672202966236, guid: c233633acd304a6449115674001fd80a, type: 3}
+      propertyPath: lines.Array.data[0]
+      value: Listen!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568170672202966236, guid: c233633acd304a6449115674001fd80a, type: 3}
+      propertyPath: lines.Array.data[1]
+      value: I stole this key from the guards. Use it to free yourself, get out of
+        this horrible place. Run and don't look back.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568170672202966236, guid: c233633acd304a6449115674001fd80a, type: 3}
+      propertyPath: lines.Array.data[2]
+      value: Pick up the key to unlock the cell with F. Beware of the guards
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c233633acd304a6449115674001fd80a, type: 3}
