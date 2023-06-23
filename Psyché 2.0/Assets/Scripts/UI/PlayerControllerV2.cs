@@ -132,11 +132,11 @@ public class PlayerControllerV2 : MonoBehaviour
 
             if (!sleeping)
             {
-                GameManager.Instance.addInsanity(0.1f);
+                GameManager.Instance.addInsanity(0.15f);
                 if (GameManager.Instance.Insanity > 65)
                 {
                     setSignZ(true);
-                    setSignF(false);
+                   // setSignF(false);
                 }
             }
             else
@@ -192,8 +192,10 @@ public class PlayerControllerV2 : MonoBehaviour
             
         }
 
+        Debug.Log("warning " + warning + "innerwarn " + innerWarning);
         if (warning || innerWarning)
         {
+            
             z.SetActive(false);
            // f.SetActive(false);
             setSignWarn(true);

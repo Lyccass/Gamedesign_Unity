@@ -25,10 +25,8 @@ public class Detect : MonoBehaviour
             {
                 GameManager.Instance.gameOver();
             }
-            else
-            {
-                PlayerControllerV2.innerWarning = true;
-            }
+            PlayerControllerV2.innerWarning = true;
+            
         }
     }
     public void OnTriggerStay2D(Collider2D collision)
@@ -40,6 +38,9 @@ public class Detect : MonoBehaviour
             {
                 GameManager.Instance.gameOver();
             }
+          
+            PlayerControllerV2.innerWarning = true;
+            
 
 
         }
