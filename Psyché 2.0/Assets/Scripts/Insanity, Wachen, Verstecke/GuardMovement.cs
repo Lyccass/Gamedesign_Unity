@@ -58,6 +58,23 @@ public class GuardMovement : MonoBehaviour
 
         isWaiting = false;
 
+        if (moveRight)
+        {
+            position.x += speed * Time.deltaTime;
+            transform.eulerAngles = new Vector3(0, 180f, 0);
+        }
+
+
+
+        if (moveLeft)
+        {
+            position.x -= speed * Time.deltaTime;
+
+
+            transform.eulerAngles = new Vector3(0, 0f, 0);
+        }
+
+
         checkWalls();
 
         // Turn on touching wall
@@ -100,21 +117,6 @@ public class GuardMovement : MonoBehaviour
            
         }
 
-        if (moveRight)
-        {
-            position.x += speed * Time.deltaTime;
-            transform.eulerAngles = new Vector3(0,180f,0);
-        }
-
-
-
-        if (moveLeft)
-        {
-            position.x -= speed * Time.deltaTime;
-            
-            
-            transform.eulerAngles = new Vector3(0, 0f, 0);
-        }
 
         gameObject.transform.position = position;
 
